@@ -23,6 +23,10 @@ body {
     font-size: 13.5px;
 }
 
+.micro-text {
+    font-size: 12px;
+}
+
 .icon-text-holder {
     display: flex;
     align-items: start;
@@ -62,4 +66,31 @@ body {
 .line-holder {
     max-width: 100%;
     overflow: hidden;
+}
+
+.table-card {
+    background-color: #171923;
+}
+
+.transaction-card {
+    display: flex;
+    justify-content: space-between;
+}
+
+.custom-tr {
+    background-color: #000;
+    /* border: none !important; */
+}
+
+.custom-tr td {
+    background-color: #000;
+}
+
+.txn-hash-search {
+    padding-top: 6%;
+    padding-bottom: 6%;
+}
+
+.explore-btn {
+    border-radius: 50px;
 }
