@@ -28,13 +28,13 @@ const Accounts = () => {
                             <div className="card-body">
                                 <h4 className="text-white">Balance</h4>
                                 <div className="row">
-                                    <div className="col-md-6">
-                                        <p className="text-white">Name <span class="badge badge-secondary text-success table-card">Polkadot</span></p>
-                                        <p className="text-white">Symbol <span class="badge badge-secondary text-success table-card">DOT</span></p>
-                                        <p className="text-white">Decimal <span class="badge badge-secondary text-success table-card">18</span></p>
+                                    <div className="col-md-6 col-6">
+                                        <p className="text-white">Name <span class="badge badge-secondary text-success table-card ml-5">Polkadot</span></p>
+                                        <p className="text-white">Symbol <span class="badge badge-secondary text-success table-card ml-5">DOT</span></p>
+                                        <p className="text-white">Decimal <span class="badge badge-secondary text-success table-card ml-5">18</span></p>
                                     </div>
 
-                                    <div className="col-md-6">
+                                    <div className="col-md-6 col-6">
                                         <h5 className="text-white">Polkadot: (DOT)</h5>
                                         <h2 className="text-primary">$2,066,292.26</h2>
                                     </div>

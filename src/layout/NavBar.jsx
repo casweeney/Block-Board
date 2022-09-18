@@ -14,15 +14,15 @@ const NavBar = () => {
                     <li className="nav-item active">
                         <Link className="nav-link" to="/">Transactions <span className="sr-only">(current)</span></Link>
                     </li>
+
                     <li className="nav-item">
                         <Link className="nav-link" to="/explorer">Explorer</Link>
                     </li>
+
                     <li className="nav-item">
                         <Link className="nav-link" to="/staking-reports">Staking Reports</Link>
                     </li>
-                    <li className="nav-item">
-                        <Link className="nav-link" to="/nft-collections">NFT & Collections</Link>
-                    </li>
+                    
 
                     <li className="nav-item">
                         <Link className="nav-link" to="/gas-fee">Gas Fee Estimate</Link>
@@ -30,6 +30,10 @@ const NavBar = () => {
 
                     <li className="nav-item">
                         <Link className="nav-link" to="/accounts">Accounts</Link>
+                    </li>
+
+                    <li className="nav-item">
+                        <Link className="nav-link" to="/nft-collections">NFT & Collections</Link>
                     </li>
                 </ul>
 
