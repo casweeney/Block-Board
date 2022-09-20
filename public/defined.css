@@ -14,9 +14,22 @@ body {
     background-color: #232530;
 }
 
+.navbar-brand {
+    font-size: 24px !important;
+}
+
 .nav-link {
     color: #fff !important;
     font-size: 12px;
+}
+
+.navbar-toggler {
+    outline: none;
+    border: none;
+}
+
+.navbar-dark .navbar-toggler-icon {
+    background-image: url('./menu-icon.svg') !important;
 }
 
 .mini-text {

@@ -11,7 +11,7 @@ const Accounts = () => {
                             <div className="input-group">
                                 <input type="text" className="form-control search-gray search-bar-border txn-hash-search" placeholder="Enter your address here..." aria-describedby="basic-addon2" />
                                 <div className="input-group-append">
-                                    <button className="input-group-text search-btn" id="basic-addon2">Lookup</button>
+                                    <button className="input-group-text search-btn" id="basic-addon2">Search</button>
                                 </div>
                             </div>
                         </div>
