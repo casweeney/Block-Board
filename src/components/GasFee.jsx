@@ -49,7 +49,6 @@ const GasFee = () => {
             });
             const data = await response.json();
             setLtcFees(data);
-            console.log(data);
         } catch (error) {
             console.log(error);
         }

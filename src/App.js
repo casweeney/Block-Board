@@ -10,6 +10,7 @@ import NftCollection from './components/NftCollection';
 function App() {
   return (
     <div>
+      <iframe src="https://coinhippo.io?widget=price-marquee&theme=dark" title="Price Update" frameBorder="0" width="100%" height="60"></iframe>
       <NavBar />
       <Switch>
         <Route path="/" exact>

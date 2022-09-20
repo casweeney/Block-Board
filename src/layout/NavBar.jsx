@@ -17,13 +17,13 @@ const NavBar = () => {
                         <Link className="nav-link" to="/">Transactions <span className="sr-only">(current)</span></Link>
                     </li>
 
-                    <li className="nav-item">
+                    {/* <li className="nav-item">
                         <Link className="nav-link" to="/explorer">Explorer</Link>
-                    </li>
+                    </li> */}
 
-                    <li className="nav-item">
+                    {/* <li className="nav-item">
                         <Link className="nav-link" to="/staking-reports">Staking Reports</Link>
-                    </li>
+                    </li> */}
                     
 
                     <li className="nav-item">
@@ -34,9 +34,9 @@ const NavBar = () => {
                         <Link className="nav-link" to="/accounts">Accounts</Link>
                     </li>
 
-                    <li className="nav-item">
+                    {/* <li className="nav-item">
                         <Link className="nav-link" to="/nft-collections">NFT & Collections</Link>
-                    </li>
+                    </li> */}
                 </ul>
 
                 <form className="form-inline">

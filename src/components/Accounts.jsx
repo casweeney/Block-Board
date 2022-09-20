@@ -29,9 +29,9 @@ const Accounts = () => {
                                 <h4 className="text-white">Balance</h4>
                                 <div className="row">
                                     <div className="col-md-6 col-6">
-                                        <p className="text-white">Name <span class="badge badge-secondary text-success table-card ml-5">Polkadot</span></p>
-                                        <p className="text-white">Symbol <span class="badge badge-secondary text-success table-card ml-5">DOT</span></p>
-                                        <p className="text-white">Decimal <span class="badge badge-secondary text-success table-card ml-5">18</span></p>
+                                        <p className="text-white">Name <span className="badge badge-secondary text-success table-card ml-5">Polkadot</span></p>
+                                        <p className="text-white">Symbol <span className="badge badge-secondary text-success table-card ml-5">DOT</span></p>
+                                        <p className="text-white">Decimal <span className="badge badge-secondary text-success table-card ml-5">18</span></p>
                                     </div>
 
                                     <div className="col-md-6 col-6">
