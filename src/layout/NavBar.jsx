@@ -26,9 +26,9 @@ const NavBar = () => {
                     </li> */}
                     
 
-                    <li className="nav-item">
+                    {/* <li className="nav-item">
                         <Link className="nav-link" to="/gas-fee">Gas Fee Estimate</Link>
-                    </li>
+                    </li> */}
 
                     <li className="nav-item">
                         <Link className="nav-link" to="/accounts">Accounts</Link>

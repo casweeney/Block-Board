@@ -30,10 +30,10 @@ const StakingReports = () => {
                                 <div className="row">
                                     <div className="col-md-6">
                                         <div className="icon-text-holder">
-                                            <img class="pr-1" src="https://s2.coinmarketcap.com/static/img/coins/64x64/1027.png" alt="" />
+                                            <img className="pr-1" src="https://s2.coinmarketcap.com/static/img/coins/64x64/1027.png" alt="" />
                                             <div>
                                                 <h6 className="text-white">Ethereum</h6>
-                                                <span class="badge badge-success">11.40%</span>
+                                                <span className="badge badge-success">11.40%</span>
                                             </div>
                                         </div>
                                     </div>

@@ -107,3 +107,22 @@ body {
 .explore-btn {
     border-radius: 50px;
 }
+
+.flex-holder {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.custom-search {
+    height: 80px;
+    background-color: #000 !important;
+    border-radius: 0;
+    /* padding-top: 8% !important;
+    padding-bottom: 8% !important; */
+    color: #fff;
+}
+
+.search-input {
+    flex: 1;
+}

@@ -1,35 +1,69 @@
 import React from 'react';
+import { ethers } from "ethers";
 
-const Transactions = () => {
+const Transactions = ({blockIdentifiers, blockTransactions}) => {
+
+    // if(blockTransactions !== null) {
+    //     blockTransactions.txs.map((txn) => (
+    //         console.log(txn)
+    //         // txn.events.map((innerTxn) => (
+    //         //     console.log(innerTxn)
+    //         // ))
+    //     ))
+    // }
+
+    const accountSubmitHandler = () => {
+
+    }
+
+    const accountChangeHandler = () => {
+
+    }
+
+    const protocolChangeHandler = () => {
+
+    }
+
     return (
         <main className="extra-dark pb-5">
             <div className="search-holder pt-4 pb-4">
                 <div className="container">
                     <div className="row">
-                        <div className="col-md-3"></div>
-                        <div className="col-md-6">
-                            <div className="input-group">
-                                <input type="text" className="form-control search-gray search-bar-border txn-hash-search" placeholder="Search transactions, addresses, tokens" aria-describedby="basic-addon2" />
-                                <div className="input-group-append">
-                                    <button className="input-group-text search-btn" id="basic-addon2">Search</button>
+                        <div className="col-md-2"></div>
+                        <div className="col-md-8">
+                            <form onSubmit={accountSubmitHandler}>
+                                <div className="flex-holder">
+                                    <div className="search-input">
+                                        <input type="text" onChange={accountChangeHandler} className="form-control custom-search" placeholder="Enter your address here..." aria-describedby="basic-addon2" />
+                                    </div>
+                                    <div>
+                                        <select onChange={protocolChangeHandler} className="form-control custom-search" name="" id="">
+                                            <option value="bitcoin">Bitcoin</option>
+                                            <option value="ethereum">Ethereum</option>
+                                        </select>
+                                    </div>
+                                    <div>
+                                        <button type="submit" className="input-group-text custom-search" id="basic-addon2">Search</button>
+                                    </div>
                                 </div>
-                            </div>
+                            </form>
                         </div>
-                        <div className="col-md-3"></div>
+                        <div className="col-md-2"></div>
                     </div>
                 </div>
             </div>
 
             <div className="container">
                 <div className="row mt-5" style={{ alignItems: "center" }}>
-                    <div className="col-md-6">
-                        <img src="/chart.png" className="img-fluid" alt="" />
+                    <div className="col-md-6" style={{ overflowX: "scroll" }}>
+                        <iframe src="https://coinhippo.io/token/ethereum?view=widget&theme=dark" title="Ethereum" frameBorder="0" width="500" height="240"></iframe>
+                        {/* <img src="/chart.png" className="img-fluid" alt="" /> */}
                     </div>
                     
                     <div className="col-md-6">
                         <div className="row" style={{ alignItems: "center" }}>
                             <div className="col-md-6">
-                                <div className="card bg-dark-gray text-white pt-4 pb-4">
+                                <div className="card bg-dark-gray text-white">
                                     <div className="card-body">
                                         <h5>Track your trades in one place, not all over the place</h5>
                                     </div>
@@ -40,11 +74,6 @@ const Transactions = () => {
                                 <div className="card bg-dark-gray text-white">
                                     <div className="card-body">
                                         <h5>Ethereum Transaction History</h5>
-                                        <div className="line-holder">
-                                            <svg width="200" height="75" viewBox="0 0 277 75" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                <path d="M0.999756 7.57909L8.1893 13.2353H12.6828L18.9736 18.0835L27.0618 13.2353L33.3527 22.9317L36.9475 7.57909L40.5422 13.2353L45.0357 7.57909V18.0835L54.9213 1.92285L62.1109 22.9317L67.503 18.0835L71.9965 38.2844L79.186 31.0121L84.5782 56.8692L89.9703 38.2844L95.3625 44.7487L98.9573 38.2844L103.451 44.7487L113.336 31.0121L119.627 38.2844L127.715 31.0121L137.601 44.7487L143.892 38.2844L154.676 56.8692L160.068 52.829L166.359 63.3335L170.853 56.8692L178.042 73.8379L193.32 44.7487L198.712 48.7888L204.104 34.2442L208.598 38.2844L228.369 13.2353L234.66 22.9317L241.849 13.2353L249.039 22.9317L254.431 18.0835L268.81 38.2844L276 31.0121" stroke="#EA3943" strokeWidth="2" strokeLinejoin="round"/>
-                                            </svg>
-                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -57,24 +86,36 @@ const Transactions = () => {
                         <div className="card table-card pb-3">
                             <div className="card-body">
                                 <div style={{ display: "flex", justifyContent: "space-between"}}>
-                                    <h6 className="mb-5 text-primary">Transactions</h6>
+                                    <h6 className="mb-5 text-primary">Latest Block Transactions</h6>
                                     <h6 className="mb-5 text-white-50">View All</h6>
                                 </div>
                                 
                                 <div className="row">
                                     <div className="col-md-12">
-                                        <div className="card custom-tr text-white mb-2">
-                                            <div className="card-body">
-                                                <div className="micro-text table-responsive transaction-card">
-                                                    <p>0x5B38Da6a.........</p>
-                                                    <p>From:  0x5B38Da6a....</p>
-                                                    <p>To: 0x5B38Da6a.....</p>
-                                                    <p>0.15ETH</p>
+                                        {blockTransactions !== null && blockTransactions.txs.slice(0, 7).map((txn, index) => (
+                                            <div key={txn.id} className="card custom-tr text-white mb-2">
+                                                <div className="card-body">
+                                                    <div className="micro-text table-responsive transaction-card">
+                                                        <p>
+                                                            Txn: <br />
+                                                            {txn.id.slice(0,6)}...{txn.id.slice(-6)}
+                                                        </p>
+                                                        <p>
+                                                            Block: <br />
+                                                            {txn.block_number}
+                                                        </p>
+                                                        <p>
+                                                            Date: <br />
+                                                            <span className="text-warning">{txn.date}</span>
+                                                        </p>
+                                                        <p className="text-success">{txn.status}</p>
+                                                        {/* <p>{innerTxn.amount}ETH</p> */}
+                                                    </div>
                                                 </div>
                                             </div>
-                                        </div>
+                                        ))}
 
-                                        <div className="card custom-tr text-white mb-2">
+                                        {/* <div className="card custom-tr text-white mb-2">
                                             <div className="card-body">
                                                 <div className="micro-text table-responsive transaction-card">
                                                     <p>0x5B38Da6a.........</p>
@@ -83,29 +124,8 @@ const Transactions = () => {
                                                     <p>0.15ETH</p>
                                                 </div>
                                             </div>
-                                        </div>
+                                        </div> */}
                                         
-                                        <div className="card custom-tr text-white mb-2">
-                                            <div className="card-body">
-                                                <div className="micro-text table-responsive transaction-card">
-                                                    <p>0x5B38Da6a.........</p>
-                                                    <p>From:  0x5B38Da6a....</p>
-                                                    <p>To: 0x5B38Da6a.....</p>
-                                                    <p>0.15ETH</p>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div className="card custom-tr text-white mb-2">
-                                            <div className="card-body">
-                                                <div className="micro-text table-responsive transaction-card">
-                                                    <p>0x5B38Da6a.........</p>
-                                                    <p>From:  0x5B38Da6a....</p>
-                                                    <p>To: 0x5B38Da6a.....</p>
-                                                    <p>0.15ETH</p>
-                                                </div>
-                                            </div>
-                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -116,46 +136,35 @@ const Transactions = () => {
                         <div className="card table-card pb-3">
                             <div className="card-body">
                                 <div style={{ display: "flex", justifyContent: "space-between"}}>
-                                    <h6 className="mb-5 text-primary">Blocks</h6>
+                                    <h6 className="mb-5 text-primary">Blocks Identifiers</h6>
                                     <h6 className="mb-5 text-white-50">View All</h6>
                                 </div>
                                 
                                 <div className="row">
                                     <div className="col-md-12">
-                                        <div className="card custom-tr text-white mb-2">
-                                            <div className="card-body">
-                                                <div className="micro-text table-responsive transaction-card">
-                                                    <p>153526</p>
-                                                    <p>MIner: Hackpool</p>
-                                                    <p>148txn</p>
-                                                    <p>0.002ETH</p>
+                                        {blockIdentifiers !== null && blockIdentifiers.data.slice(0,7).map((txn) => (
+                                            <div className="card custom-tr text-white mb-2" key={txn.id}>
+                                                <div className="card-body">
+                                                    <div className="micro-text table-responsive transaction-card">
+                                                        <p>
+                                                            ID: <br />
+                                                            {txn.id.slice(0,6)} ... {txn.id.slice(-6)}
+                                                        </p>
+                                                        <p>
+                                                            Parent ID: <br />
+                                                            {txn.parent_id.slice(0,6)} ... {txn.parent_id.slice(-6)}
+                                                        </p>
+                                                        <p>
+                                                            Date: <br />
+                                                            <span className="text-warning">{txn.date}</span>
+                                                        </p>
+                                                    </div>
                                                 </div>
                                             </div>
-                                        </div>
-
-                                        <div className="card custom-tr text-white mb-2">
-                                            <div className="card-body">
-                                                <div className="micro-text table-responsive transaction-card">
-                                                    <p>153526</p>
-                                                    <p>MIner: Hackpool</p>
-                                                    <p>148txn</p>
-                                                    <p>0.002ETH</p>
-                                                </div>
-                                            </div>
-                                        </div>
+                                        ))}
                                         
-                                        <div className="card custom-tr text-white mb-2">
-                                            <div className="card-body">
-                                                <div className="micro-text table-responsive transaction-card">
-                                                    <p>153526</p>
-                                                    <p>MIner: Hackpool</p>
-                                                    <p>148txn</p>
-                                                    <p>0.002ETH</p>
-                                                </div>
-                                            </div>
-                                        </div>
 
-                                        <div className="card custom-tr text-white mb-2">
+                                        {/* <div className="card custom-tr text-white mb-2">
                                             <div className="card-body">
                                                 <div className="micro-text table-responsive transaction-card">
                                                     <p>153526</p>
@@ -164,7 +173,7 @@ const Transactions = () => {
                                                     <p>0.002ETH</p>
                                                 </div>
                                             </div>
-                                        </div>
+                                        </div> */}
                                     </div>
                                 </div>
                             </div>
