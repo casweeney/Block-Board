@@ -1,26 +1,41 @@
 import React, { useState, useEffect } from 'react';
 import { ethers } from "ethers";
+import { useParams, Route, Link, useRouteMatch } from 'react-router-dom';
+import SearchBar from "../common/SearchBar";
 
-const Accounts = ({account, accountData, accountTransactions, onSetProtocol, onSetAccount, onSubmitClicked}) => {
-    const loggedAccount = "0x617cd3DB0CbF26F323D5b72975c5311343e09115";
+const Accounts = () => {
+    const params = useParams();
+    const { protocol, network, address } = params;
+
+    const [accountData, setAccountData] = useState(null);
+    const [accountTransactions, setAccountTransactions] = useState(null);
+
+    const getAccountData = async () => {
+        const response = await fetch(`https://ubiquity.api.blockdaemon.com/v1/${protocol}/${network}/account/${address}`, {
+            headers: {Authorization: `Bearer ${process.env.REACT_APP_UBIQUITY_KEY}`}
+        });
+
+        const data = await response.json();
+        setAccountData(data);
+    }
+
+    const getAccountTransactions = async () => {
+      const response = await fetch(`https://ubiquity.api.blockdaemon.com/v1/${protocol}/${network}/account/${address}/txs`, {
+        headers: {Authorization: `Bearer ${process.env.REACT_APP_UBIQUITY_KEY}`}
+      });
+
+      const data = await response.json();
+
+      setAccountTransactions(data);
+    }
+
+    useEffect(() => {
+        getAccountData();
+        getAccountTransactions();
+    }, [address, protocol]);
+
+    const loggedAccount = address;
     const [filtered, setFiltered] = useState(null)
-
-    // console.log(accountTransactions);
-
-    const accountChangeHandler = (e) => {
-        e.preventDefault();
-        onSetAccount(e.target.value);
-    }
-
-    const protocolChangeHandler = (e) => {
-        e.preventDefault();
-        onSetProtocol(e.target.value);
-    }
-
-    const accountSubmitHandler = (e) => {
-        e.preventDefault();
-        onSubmitClicked();
-    }
 
     let accountDetails = {
         name: "N/A",
@@ -59,22 +74,7 @@ const Accounts = ({account, accountData, accountTransactions, onSetProtocol, onS
                     <div className="row">
                         <div className="col-md-2"></div>
                         <div className="col-md-8">
-                            <form onSubmit={accountSubmitHandler}>
-                                <div className="flex-holder">
-                                    <div className="search-input">
-                                        <input type="text" onChange={accountChangeHandler} className="form-control custom-search" placeholder="Enter your address here..." aria-describedby="basic-addon2" />
-                                    </div>
-                                    <div>
-                                        <select onChange={protocolChangeHandler} className="form-control custom-search" name="" id="">
-                                            <option value="bitcoin">Bitcoin</option>
-                                            <option value="ethereum">Ethereum</option>
-                                        </select>
-                                    </div>
-                                    <div>
-                                        <button type="submit" className="input-group-text custom-search" id="basic-addon2">Search</button>
-                                    </div>
-                                </div>
-                            </form>
+                            <SearchBar />
                         </div>
                         <div className="col-md-2"></div>
                     </div>
@@ -87,7 +87,9 @@ const Accounts = ({account, accountData, accountTransactions, onSetProtocol, onS
                     <div className="col-md-6">
                         <div className="card bg-dark-gray">
                             <div className="card-body">
-                                <h4 className="text-white">Balance</h4>
+                                <h4 className="text-white text-center">Account: <span className="ml-2">{address.slice(0,6)} ... {address.slice(-6)}</span></h4>
+                                <hr className="border-white" />
+                                <h5 className="text-white">Balance</h5>
                                 <div className="row">
                                     <div className="col-md-6 col-6">
                                         <p className="text-white">Name <span className="badge badge-secondary text-success table-card ml-5">{accountDetails.name}</span></p>
@@ -113,6 +115,7 @@ const Accounts = ({account, accountData, accountTransactions, onSetProtocol, onS
                             <table className="table table-dark custom-tr table-striped">
                                 <thead>
                                     <tr className="custom-tr text-danger">
+                                        <th><span><i className="fa fa-list"></i></span></th>
                                         <th>Txn Hash</th>
                                         <th>Type</th>
                                         <th>Age</th>
@@ -127,7 +130,8 @@ const Accounts = ({account, accountData, accountTransactions, onSetProtocol, onS
                                     {filtered !== null && filtered.map((txn, index) => (
                                         txn.map((innerTxn, innerIndex) => (
                                             <tr className="custom-tr" key={innerTxn.id}>
-                                                <td>{innerTxn.transaction_id.slice(0,10)}...{innerTxn.transaction_id.slice(-10)}</td>
+                                                <td><span><i className="fa fa-cube"></i></span></td>
+                                                <td><Link to={`/details/tx/${innerTxn.transaction_id}`}>{innerTxn.transaction_id.slice(0,10)}...{innerTxn.transaction_id.slice(-10)}</Link></td>
                                                 <td>{innerTxn.type}</td>
                                                 <td>{innerTxn.date}</td>
                                                 <td>{innerTxn.source.slice(0,6)}...{innerTxn.source.slice(-6)}</td>
@@ -136,7 +140,7 @@ const Accounts = ({account, accountData, accountTransactions, onSetProtocol, onS
                                                     <span className="badge badge-pill badge-success px-2 py-1">{innerTxn.amount}</span>
                                                 </td>
                                                 <td>
-                                                    <button className="btn btn-outline-primary btn-sm explore-btn">Explore Block</button>
+                                                    <button className="btn btn-outline-primary btn-sm explore-btn"><Link to={`/details/tx/${innerTxn.transaction_id}`}>Explore Block</Link></button>
                                                 </td>
                                             </tr>
                                         ))
