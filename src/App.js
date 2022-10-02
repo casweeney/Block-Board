@@ -7,15 +7,29 @@ import Explorer from './components/Explorer';
 import Accounts from './components/Accounts';
 import StakingReports from './components/StakingReports';
 import NftCollection from './components/NftCollection';
+import TxDetails from './components/TxDetails';
 
 function App() {
-    const [account, setAccount] = useState(null);
-    const [protocol, setProtocol] = useState(null);
-    const [accountData, setAccountData] = useState(null);
-    const [accountTransactions, setAccountTransactions] = useState(null);
     const [currentBlock, setCurrentBlock] = useState(null);
     const [blockTransactions, setBlockTransactions] = useState(null);
     const [blockIdentifiers, setBlockIdentifiers] = useState(null);
+    const [latestTransactions, setLatestTransactions] = useState(null);
+
+    const defaultProtocol = localStorage.getItem('defaultProtocol');
+    const cleanedDefaultProtocol = JSON.parse(defaultProtocol);
+
+    console.log(defaultProtocol)
+
+    const getLatestTransactions = async () => {
+      const response = await fetch(`https://ubiquity.api.blockdaemon.com/v1/${cleanedDefaultProtocol}/mainnet/txs`, {
+        headers: {
+          Authorization: `Bearer ${process.env.REACT_APP_UBIQUITY_KEY}`
+        }
+      });
+
+      const data = await response.json();
+      setLatestTransactions(data);
+    }
 
     const getBlockIdentifiers = async () => {
       const response = await fetch(`https://ubiquity.api.blockdaemon.com/v1/ethereum/mainnet/block_identifiers`, {
@@ -50,40 +64,8 @@ function App() {
       setBlockTransactions(data);
     }
 
-    const getAccountData = async () => {
-        const response = await fetch(`https://ubiquity.api.blockdaemon.com/v1/ethereum/mainnet/account/0x617cd3DB0CbF26F323D5b72975c5311343e09115`, {
-            headers: {Authorization: `Bearer ${process.env.REACT_APP_UBIQUITY_KEY}`}
-        });
-
-        const data = await response.json();
-        setAccountData(data);
-    }
-
-    const getAccountTransactions = async () => {
-      const response = await fetch(`https://ubiquity.api.blockdaemon.com/v1/ethereum/mainnet/account/0x617cd3DB0CbF26F323D5b72975c5311343e09115/txs`, {
-        headers: {Authorization: `Bearer ${process.env.REACT_APP_UBIQUITY_KEY}`}
-      });
-
-      const data = await response.json();
-
-      setAccountTransactions(data);
-    }
-
-    const setNewProtocol = (newProtocol) => {
-      setProtocol(newProtocol);
-    }
-
-    const setNewAccount = (newAccount) => {
-      setAccount(newAccount);
-    }
-
-    const submitClickHandler = () => {
-      console.log("Hello");
-    }
-
     useEffect(() => {
-        getAccountData();
-        getAccountTransactions();
+        getLatestTransactions();
         getCurrentBlock();
         if(currentBlock !== null) {
           getBlockTransactions();
@@ -97,7 +79,7 @@ function App() {
       <NavBar />
       <Switch>
         <Route path="/" exact>
-          <Transactions blockIdentifiers={blockIdentifiers} blockTransactions={blockTransactions} />
+          <Transactions defaultProtocol={defaultProtocol} blockIdentifiers={blockIdentifiers} blockTransactions={blockTransactions} />
         </Route>
 
         <Route path="/gas-fee" exact>
@@ -105,11 +87,11 @@ function App() {
         </Route>
 
         <Route path="/explorer" exact>
-          <Explorer />
+          <Explorer latestTransactions={latestTransactions} />
         </Route>
 
-        <Route path="/accounts" exact>
-          <Accounts account={account} accountData={accountData} accountTransactions={accountTransactions} onSetProtocol={setNewProtocol} onSetAccount={setNewAccount} onSubmitClicked={submitClickHandler} />
+        <Route path="/accounts/:protocol/:network/:address" exact>
+          <Accounts />
         </Route>
 
         <Route path="/staking-reports" exact>
@@ -118,6 +100,10 @@ function App() {
 
         <Route path="/nft-collections" exact>
           <NftCollection />
+        </Route>
+
+        <Route path="/details/tx/:transactionId" exact>
+          <TxDetails />
         </Route>
       </Switch>
     </div>
