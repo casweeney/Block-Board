@@ -1,10 +1,8 @@
 import React from 'react';
-import { ethers } from "ethers";
 import { Link } from 'react-router-dom';
 import SearchBar from "../common/SearchBar";
 
 const Transactions = ({defaultProtocol, blockIdentifiers, blockTransactions}) => {
-    defaultProtocol = JSON.parse(defaultProtocol);
 
     const dataProtocol = defaultProtocol.charAt(0).toUpperCase() + defaultProtocol.slice(1);
     console.log(defaultProtocol);
@@ -30,7 +28,6 @@ const Transactions = ({defaultProtocol, blockIdentifiers, blockTransactions}) =>
                 <div className="row mt-5" style={{ alignItems: "center" }}>
                     <div className="col-md-6" style={{ overflowX: "scroll" }}>
                         <iframe src={`https://coinhippo.io/token/${defaultProtocol}?view=widget&theme=dark`} title={dataProtocol} frameBorder="0" width="500" height="240"></iframe>
-                        {/* <img src="/chart.png" className="img-fluid" alt="" /> */}
                     </div>
                     
                     <div className="col-md-6">

@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { Link } from "react-router-dom";
 
-const NavBar = () => {
-    const [defaultProtocol, setDefaultProtocol] = useState("ethereum");
+const NavBar = ({ onProtocolChangeSubmit }) => {
+    const [defaultProtocol, setDefaultProtocol] = useState("");
 
     const chainChangeHandler = (e) => {
         e.preventDefault();
@@ -15,18 +15,9 @@ const NavBar = () => {
         if(defaultProtocol === "") {
             alert("Select a protocol");
         } else {
-            localStorage.setItem("defaultProtocol", JSON.stringify(defaultProtocol));
+            onProtocolChangeSubmit(defaultProtocol);
         }
     }
-
-
-    useEffect(() => {
-        const defaultChain = localStorage.getItem('defaultProtocol');
-
-        if(defaultChain === null) {
-            localStorage.setItem("defaultProtocol", JSON.stringify(defaultProtocol));
-        }
-    }, []);
 
     return (
         <nav className="navbar navbar-expand-lg navbar-dark bg-dark extra-dark">
@@ -52,9 +43,9 @@ const NavBar = () => {
                     </li> */}
                     
 
-                    <li className="nav-item">
+                    {/* <li className="nav-item">
                         <Link className="nav-link" to="/gas-fee">Gas Fee Estimate</Link>
-                    </li>
+                    </li> */}
 
 
                     {/* <li className="nav-item">

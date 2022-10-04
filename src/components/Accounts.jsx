@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { ethers } from "ethers";
-import { useParams, Route, Link, useRouteMatch } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 import SearchBar from "../common/SearchBar";
+import LoadingSpinner from "./UI/LoadingSpinner";
 
 const Accounts = () => {
     const params = useParams();
@@ -66,6 +67,16 @@ const Accounts = () => {
     useEffect(() => {
         fetchFiltered();
     }, [accountTransactions]);
+
+
+    if(accountData === null) {
+        return (
+            <div className="text-center mt-5">
+                <LoadingSpinner />
+                <h3 className="text-center text-white mt-3">Loading...</h3>
+            </div>
+        )
+    }
 
     return (
         <main>

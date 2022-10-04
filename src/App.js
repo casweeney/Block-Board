@@ -8,20 +8,26 @@ import Accounts from './components/Accounts';
 import StakingReports from './components/StakingReports';
 import NftCollection from './components/NftCollection';
 import TxDetails from './components/TxDetails';
+import BlockTransactions from './components/BlockTransactions';
 
 function App() {
     const [currentBlock, setCurrentBlock] = useState(null);
     const [blockTransactions, setBlockTransactions] = useState(null);
     const [blockIdentifiers, setBlockIdentifiers] = useState(null);
     const [latestTransactions, setLatestTransactions] = useState(null);
+    const [defaultProtocol, setDefaultProtocol] = useState("");
 
-    const defaultProtocol = localStorage.getItem('defaultProtocol');
-    const cleanedDefaultProtocol = JSON.parse(defaultProtocol);
+    let defaultChain = localStorage.getItem('defaultProtocol');
 
-    console.log(defaultProtocol)
+    const changeDefaultProtocol = (defaultProtocol) => {
+      
+      localStorage.setItem("defaultProtocol", JSON.stringify(defaultProtocol));
+      console.log("Protocol changed");
+      alert("Default protocol changed");
+    }
 
     const getLatestTransactions = async () => {
-      const response = await fetch(`https://ubiquity.api.blockdaemon.com/v1/${cleanedDefaultProtocol}/mainnet/txs`, {
+      const response = await fetch(`https://ubiquity.api.blockdaemon.com/v1/ethereum/mainnet/txs`, {
         headers: {
           Authorization: `Bearer ${process.env.REACT_APP_UBIQUITY_KEY}`
         }
@@ -73,10 +79,20 @@ function App() {
         getBlockIdentifiers();
     }, [currentBlock]);
 
+    useEffect(() => {
+        if(defaultChain === null) {
+          localStorage.setItem("defaultProtocol", JSON.stringify("ethereum"));
+        }
+
+        defaultChain = JSON.parse(localStorage.getItem('defaultProtocol'));
+        setDefaultProtocol(defaultChain);
+        
+    }, [defaultProtocol]);
+
   return (
     <div>
       {/* <iframe src="https://coinhippo.io?widget=price-marquee&theme=dark" title="Price Update" frameBorder="0" width="100%" height="60"></iframe> */}
-      <NavBar />
+      <NavBar onProtocolChangeSubmit={changeDefaultProtocol} />
       <Switch>
         <Route path="/" exact>
           <Transactions defaultProtocol={defaultProtocol} blockIdentifiers={blockIdentifiers} blockTransactions={blockTransactions} />
@@ -104,6 +120,10 @@ function App() {
 
         <Route path="/details/tx/:transactionId" exact>
           <TxDetails />
+        </Route>
+
+        <Route path="/block/:blockNumber" exact>
+          <BlockTransactions />
         </Route>
       </Switch>
     </div>

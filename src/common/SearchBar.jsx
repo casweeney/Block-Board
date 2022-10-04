@@ -1,4 +1,4 @@
-import React, { useState, useEffect} from 'react';
+import React, { useState} from 'react';
 import { useHistory } from 'react-router-dom';
 
 const SearchBar = () => {
@@ -29,6 +29,10 @@ const SearchBar = () => {
 
             if(account.length === 42) {
                 history.push(`/accounts/${protocol}/mainnet/${account}`);
+            }
+
+            if(account.length === 8) {
+                history.push(`/block/${account}`);
             }
             
             setAccount("");

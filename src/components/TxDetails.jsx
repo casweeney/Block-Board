@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { useParams, Route, Link, useRouteMatch } from "react-router-dom";
+import { useParams } from "react-router-dom";
+import LoadingSpinner from "./UI/LoadingSpinner";
 
 const TxDetails = () => {
     const [transactionDetails, setTransactionDetails] = useState(null);
 
-    const match = useRouteMatch();
     const params = useParams();
     const { transactionId } = params;
 
@@ -27,7 +27,12 @@ const TxDetails = () => {
     }, []);
 
     if(transactionDetails == null) {
-        return <h4 className="text-center text-white mt-5">Loading...</h4>
+        return (
+            <div className="text-center mt-5">
+                <LoadingSpinner />
+                <h3 className="text-center text-white mt-3">Loading...</h3>
+            </div>
+        )
     }
 
     return (

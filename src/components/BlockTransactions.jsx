@@ -1,12 +1,30 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import SearchBar from "../common/SearchBar";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import LoadingSpinner from "./UI/LoadingSpinner";
 
-const Explorer = ({ latestTransactions }) => {
-    // console.log(latestTransactions);
+const BlockTransactions = () => {
+    const params = useParams();
+    const { blockNumber } = params;
 
-    if(latestTransactions === null) {
+    const [blockTransactions, setBlockTransactions] = useState(null);
+
+    const getBlockTransactions = async () => {
+        const response = await fetch(`https://ubiquity.api.blockdaemon.com/v1/ethereum/mainnet/block/${blockNumber}`, {
+          headers: {Authorization: `Bearer ${process.env.REACT_APP_UBIQUITY_KEY}`}
+        });
+  
+        const data = await response.json();
+  
+        setBlockTransactions(data);
+    }
+
+    useEffect(() => {
+        getBlockTransactions();
+    }, []);
+
+
+    if(blockTransactions === null) {
         return (
             <div className="text-center mt-5">
                 <LoadingSpinner />
@@ -32,7 +50,7 @@ const Explorer = ({ latestTransactions }) => {
             <div className="container-fluid mt-5">
                 <div className="row">
                     <div className="col-md-12">
-                        <h4 className="text-white text-center mb-5">25 Latest transactions on: <strong>Ethereum</strong></h4>
+                        <h4 className="text-white text-center mb-5">{blockTransactions.txs.length} transactions on ethereum block: <strong>{blockNumber}</strong></h4>
                         <div className="table-responsive">
                             <table className="table table-dark custom-tr table-striped">
                                 <thead>
@@ -48,9 +66,9 @@ const Explorer = ({ latestTransactions }) => {
                                 </thead>
 
                                 <tbody className="micro-text">
-                                    {latestTransactions !== null && 
-                                        latestTransactions.data.length > 0 && 
-                                        latestTransactions.data.map((item, index) => (
+                                    {blockTransactions !== null && 
+                                        blockTransactions.txs.length > 0 && 
+                                        blockTransactions.txs.map((item, index) => (
                                             <tr className="custom-tr" key={item.id}>
                                                 <td>{index + 1}</td>
                                                 <td><Link to={`/details/tx/${item.id}`}>{item.id}</Link></td>
@@ -89,4 +107,4 @@ const Explorer = ({ latestTransactions }) => {
     )
 }
 
-export default Explorer;
+export default BlockTransactions;
