@@ -24,6 +24,7 @@ const TxDetails = () => {
 
     useEffect(() => {
         getTransctionById();
+        // eslint-disable-next-line
     }, []);
 
     if(transactionDetails == null) {
@@ -60,7 +61,7 @@ const TxDetails = () => {
                                             <div className="card-body">
                                                 <div className="micro-text table-responsive">
                                                     <p>Transaction Hash: {transactionDetails.id}</p>
-                                                    <p>Status: <span className="text-success">{transactionDetails.status}</span></p>
+                                                    <p>Status: <span className={transactionDetails.status === "success" ? "text-success" : "text-danger"}>{transactionDetails.status}</span></p>
                                                     <p>Timestamp: {transactionDetails.date}</p>
                                                     <p>Confirmations: {transactionDetails.confirmations}</p>
                                                     <h5>Events ({transactionDetails.num_events}):</h5>

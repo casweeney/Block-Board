@@ -77,13 +77,14 @@ function App() {
           getBlockTransactions();
         }
         getBlockIdentifiers();
+        // eslint-disable-next-line
     }, [currentBlock]);
 
     useEffect(() => {
         if(defaultChain === null) {
           localStorage.setItem("defaultProtocol", JSON.stringify("ethereum"));
         }
-
+        // eslint-disable-next-line
         defaultChain = JSON.parse(localStorage.getItem('defaultProtocol'));
         setDefaultProtocol(defaultChain);
         
