@@ -29,41 +29,41 @@ const NavBar = ({ onProtocolChangeSubmit }) => {
                 </button>
 
                 <div className="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul className="navbar-nav mr-auto">
-                    <li className="nav-item active">
-                        <Link className="nav-link" to="/">Transactions <span className="sr-only">(current)</span></Link>
-                    </li>
+                    <ul className="navbar-nav ml-auto">
+                        <li className="nav-item active">
+                            <Link className="nav-link" to="/">Transactions <span className="sr-only">(current)</span></Link>
+                        </li>
 
-                    <li className="nav-item">
-                        <Link className="nav-link" to="/explorer">Explorer</Link>
-                    </li>
+                        <li className="nav-item">
+                            <Link className="nav-link" to="/explorer">Explorer</Link>
+                        </li>
 
-                    {/* <li className="nav-item">
-                        <Link className="nav-link" to="/staking-reports">Staking Reports</Link>
-                    </li> */}
-                    
+                        {/* <li className="nav-item">
+                            <Link className="nav-link" to="/staking-reports">Staking Reports</Link>
+                        </li> */}
+                        
 
-                    {/* <li className="nav-item">
-                        <Link className="nav-link" to="/gas-fee">Gas Fee Estimate</Link>
-                    </li> */}
+                        <li className="nav-item">
+                            <Link className="nav-link" to="/gas-fee">Gas Fee Estimate</Link>
+                        </li>
 
 
-                    {/* <li className="nav-item">
-                        <Link className="nav-link" to="/nft-collections">NFT & Collections</Link>
-                    </li> */}
-                </ul>
+                        <li className="nav-item">
+                            <Link className="nav-link" to="/nft-collections">NFT & Collections</Link>
+                        </li>
+                    </ul>
 
-                <form onSubmit={chainSubmitHandler} className="form-inline">
-                    <div className="input-group">
-                    <select onChange={chainChangeHandler} className="form-control text-white search-gray search-bar-border" aria-label="protocol-name" aria-describedby="basic-addon1">
-                        <option value="ethereum">Ethereum</option>
-                        <option value="bitcoin">Bitcoin</option>
-                    </select>
-                    <div className="input-group-append">
-                        <button className="input-group-text btn btn-primary" id="basic-addon1">Change Protocol</button>
-                    </div>
-                    </div>
-                </form>
+                    {/* <form onSubmit={chainSubmitHandler} className="form-inline">
+                        <div className="input-group">
+                        <select onChange={chainChangeHandler} className="form-control text-white search-gray search-bar-border" aria-label="protocol-name" aria-describedby="basic-addon1">
+                            <option value="ethereum">Ethereum</option>
+                            <option value="bitcoin">Bitcoin</option>
+                        </select>
+                        <div className="input-group-append">
+                            <button className="input-group-text btn btn-primary" id="basic-addon1">Change Protocol</button>
+                        </div>
+                        </div>
+                    </form> */}
                 </div>
             </div>
         </nav>
