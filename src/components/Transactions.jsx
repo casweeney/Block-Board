@@ -32,18 +32,10 @@ const Transactions = ({defaultProtocol, blockIdentifiers, blockTransactions}) =>
                     
                     <div className="col-md-6">
                         <div className="row" style={{ alignItems: "center" }}>
-                            <div className="col-md-6">
+                            <div className="col-md-12">
                                 <div className="card bg-dark-gray text-white">
                                     <div className="card-body">
-                                        <h5>Track your trades in one place, not all over the place</h5>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div className="col-md-6">
-                                <div className="card bg-dark-gray text-white">
-                                    <div className="card-body">
-                                        <h5>Ethereum Transaction History</h5>
+                                        <h5 style={{ lineHeight: "1.5" }}>Track your transactions in one place across multiple blockchains, not all over the place.</h5>
                                     </div>
                                 </div>
                             </div>

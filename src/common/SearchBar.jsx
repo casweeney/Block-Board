@@ -1,4 +1,4 @@
-import React, { useState} from 'react';
+import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 
 const SearchBar = () => {
@@ -11,10 +11,17 @@ const SearchBar = () => {
         setAccount(e.target.value);
     }
 
-    const protocolChangeHandler = (e) => {
-        e.preventDefault();
-        setProtocol(e.target.value);
-    }
+    // const protocolChangeHandler = (e) => {
+    //     e.preventDefault();
+    //     setProtocol(e.target.value);
+    // }
+
+    useEffect(() => {
+        const defaultChain = JSON.parse(localStorage.getItem('defaultProtocol'));
+        setProtocol(defaultChain);
+    }, []);
+
+    console.log(protocol);
 
     const accountSubmitHandler = (e) => {
         e.preventDefault();
@@ -43,14 +50,14 @@ const SearchBar = () => {
         <form onSubmit={accountSubmitHandler}>
             <div className="flex-holder">
                 <div className="search-input">
-                    <input type="text" value={account} onChange={accountChangeHandler} className="form-control custom-search" placeholder="Enter your address here..." aria-describedby="basic-addon2" />
+                    <input type="text" value={account} onChange={accountChangeHandler} className="form-control custom-search" placeholder="Search by Address / Txn Hash / Block" aria-describedby="basic-addon2" />
                 </div>
-                <div>
+                {/* <div>
                     <select onChange={protocolChangeHandler} className="form-control custom-search" name="" id="">
                         <option value="bitcoin">Bitcoin</option>
                         <option value="ethereum">Ethereum</option>
                     </select>
-                </div>
+                </div> */}
                 <div>
                     <button type="submit" className="input-group-text custom-search pl-3 pr-3" id="basic-addon2">Search</button>
                 </div>
