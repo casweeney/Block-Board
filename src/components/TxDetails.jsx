@@ -41,7 +41,7 @@ const TxDetails = () => {
             <div className="search-holder pt-4 pb-4">
                 <div className="container">
                     <div className="row">
-                        <div className="col-md-12">
+                        <div className="col-md-12" style={{ overflowX: "scroll" }}>
                             <p className="text-white"><span className="text-primary font-weight-bold mr-5">Txn Hash: </span>{transactionDetails != null ? transactionDetails.id : "loading..."}</p>
                             <p className="text-white"><span className="text-primary font-weight-bold mr-5">Block: </span>{transactionDetails != null ? transactionDetails.block_number : "loading..."}</p>
                         </div>
