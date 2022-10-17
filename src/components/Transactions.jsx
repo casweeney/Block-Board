@@ -26,7 +26,7 @@ const Transactions = ({defaultProtocol, blockIdentifiers, blockTransactions}) =>
 
             <div className="container">
                 <div className="row mt-5" style={{ alignItems: "center" }}>
-                    <div className="col-md-6" style={{ overflowX: "scroll" }}>
+                    <div className="col-md-6 mb-4" style={{ overflowX: "scroll" }}>
                         <iframe src={`https://coinhippo.io/token/${defaultProtocol}?view=widget&theme=dark`} title={dataProtocol} frameBorder="0" width="500" height="240"></iframe>
                     </div>
                     
