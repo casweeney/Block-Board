@@ -49,7 +49,7 @@ const Transactions = ({defaultProtocol, blockIdentifiers, blockTransactions}) =>
                             <div className="card-body">
                                 <div style={{ display: "flex", justifyContent: "space-between"}}>
                                     <h6 className="mb-5 text-primary">Latest Block Transactions</h6>
-                                    <h6 className="mb-5 text-white-50">View All</h6>
+                                    {/* <h6 className="mb-5 text-white-50">View All</h6> */}
                                 </div>
                                 
                                 <div className="row">
@@ -65,7 +65,7 @@ const Transactions = ({defaultProtocol, blockIdentifiers, blockTransactions}) =>
                                                         </p>
                                                         <p>
                                                             Txn: <br />
-                                                            <Link to={`/details/tx/${txn.id}`}>{txn.id.slice(0,6)}...{txn.id.slice(-6)}</Link>
+                                                            <Link className="text-info" to={`/details/tx/${txn.id}`}>{txn.id.slice(0,6)}...{txn.id.slice(-6)}</Link>
                                                         </p>
                                                         <p>
                                                             Date: <br />
@@ -100,7 +100,7 @@ const Transactions = ({defaultProtocol, blockIdentifiers, blockTransactions}) =>
                             <div className="card-body">
                                 <div style={{ display: "flex", justifyContent: "space-between"}}>
                                     <h6 className="mb-5 text-primary">Blocks Identifiers</h6>
-                                    <h6 className="mb-5 text-white-50">View All</h6>
+                                    {/* <h6 className="mb-5 text-white-50">View All</h6> */}
                                 </div>
                                 
                                 <div className="row">

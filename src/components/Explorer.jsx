@@ -53,13 +53,13 @@ const Explorer = ({ latestTransactions }) => {
                                         latestTransactions.data.map((item, index) => (
                                             <tr className="custom-tr" key={item.id}>
                                                 <td>{index + 1}</td>
-                                                <td><Link to={`/details/tx/${item.id}`}>{item.id}</Link></td>
+                                                <td><Link className="text-info" to={`/details/tx/${item.id}`}>{item.id}</Link></td>
                                                 <td>{item.block_number}</td>
                                                 <td>{item.date}</td>
                                                 <td className={item.status === "completed" ? "text-success" : "text-danger"}>{item.status}</td>
                                                 <td>{item.num_events}</td>
                                                 <td>
-                                                    <button className="btn btn-outline-primary btn-sm explore-btn"><Link to={`/details/tx/${item.id}`}>Explore Block</Link></button>
+                                                    <button className="btn btn-outline-primary btn-sm explore-btn"><Link className="text-white" to={`/details/tx/${item.id}`}>Explore Block</Link></button>
                                                 </td>
                                             </tr>
                                         ))
