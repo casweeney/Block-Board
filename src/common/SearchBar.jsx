@@ -4,11 +4,23 @@ import { useHistory } from 'react-router-dom';
 const SearchBar = () => {
     const [account, setAccount] = useState("");
     const [protocol, setProtocol] = useState("");
+    const [currentBlock, setCurrentBlock] = useState(null);
     const history = useHistory();
 
     const accountChangeHandler = (e) => {
         e.preventDefault();
         setAccount(e.target.value);
+    }
+
+    const getCurrentBlock = async () => {
+        const response = await fetch(`https://ubiquity.api.blockdaemon.com/v1/ethereum/mainnet/sync/block_number`, {
+          headers: {
+            Authorization: `Bearer ${process.env.REACT_APP_UBIQUITY_KEY}`
+          }
+        });
+  
+        const data = await response.json();
+        setCurrentBlock(data);
     }
 
     // const protocolChangeHandler = (e) => {
@@ -19,6 +31,7 @@ const SearchBar = () => {
     useEffect(() => {
         const defaultChain = JSON.parse(localStorage.getItem('defaultProtocol'));
         setProtocol(defaultChain);
+        getCurrentBlock();
     }, []);
 
     console.log(protocol);
@@ -38,7 +51,7 @@ const SearchBar = () => {
                 history.push(`/accounts/${protocol}/mainnet/${account}`);
             }
 
-            if(account.length === 8) {
+            if(account.length <= String(currentBlock).length) {
                 history.push(`/block/${account}`);
             }
             
