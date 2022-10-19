@@ -21,7 +21,7 @@ const BlockTransactions = () => {
 
     useEffect(() => {
         getBlockTransactions();
-    }, []);
+    }, [blockNumber]);
 
 
     if(blockTransactions === null) {
