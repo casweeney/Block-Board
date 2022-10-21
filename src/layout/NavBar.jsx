@@ -63,7 +63,7 @@ const NavBar = ({ onProtocolChangeSubmit }) => {
                             <option value="ethereum">Ethereum</option>
                             <option value="litecoin">Litecoin</option>
                             <option value="polkadot">Polkadot</option>
-                            <option value="stellar">Stellar</option>
+                            {/* <option value="stellar">Stellar</option> */}
                             <option value="tezos">Tezos</option>
                             {/* <option value="xrp">XRP</option> */}
                         </select>
