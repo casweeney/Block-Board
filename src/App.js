@@ -17,17 +17,17 @@ function App() {
     const [latestTransactions, setLatestTransactions] = useState(null);
     const [defaultProtocol, setDefaultProtocol] = useState("");
 
+    console.log(defaultProtocol, " Current Block Number:", currentBlock)
+
     let defaultChain = localStorage.getItem('defaultProtocol');
 
     const changeDefaultProtocol = (defaultProtocol) => {
-      
       localStorage.setItem("defaultProtocol", JSON.stringify(defaultProtocol));
-      console.log("Protocol changed");
       alert("Default protocol changed");
     }
 
     const getLatestTransactions = async () => {
-      const response = await fetch(`https://ubiquity.api.blockdaemon.com/v1/ethereum/mainnet/txs`, {
+      const response = await fetch(`https://ubiquity.api.blockdaemon.com/v1/${defaultProtocol}/mainnet/txs`, {
         headers: {
           Authorization: `Bearer ${process.env.REACT_APP_UBIQUITY_KEY}`
         }
@@ -38,7 +38,7 @@ function App() {
     }
 
     const getBlockIdentifiers = async () => {
-      const response = await fetch(`https://ubiquity.api.blockdaemon.com/v1/ethereum/mainnet/block_identifiers`, {
+      const response = await fetch(`https://ubiquity.api.blockdaemon.com/v1/${defaultProtocol}/mainnet/block_identifiers`, {
         headers: {
           Authorization: `Bearer ${process.env.REACT_APP_UBIQUITY_KEY}`
         }
@@ -49,7 +49,7 @@ function App() {
     }
 
     const getCurrentBlock = async () => {
-      const response = await fetch(`https://ubiquity.api.blockdaemon.com/v1/ethereum/mainnet/sync/block_number`, {
+      const response = await fetch(`https://ubiquity.api.blockdaemon.com/v1/${defaultProtocol}/mainnet/sync/block_number`, {
         headers: {
           Authorization: `Bearer ${process.env.REACT_APP_UBIQUITY_KEY}`
         }
@@ -60,7 +60,7 @@ function App() {
     }
 
     const getBlockTransactions = async () => {
-      const response = await fetch(`https://ubiquity.api.blockdaemon.com/v1/ethereum/mainnet/block/${currentBlock}`, {
+      const response = await fetch(`https://ubiquity.api.blockdaemon.com/v1/${defaultProtocol}/mainnet/block/${currentBlock}`, {
         headers: {
           Authorization: `Bearer ${process.env.REACT_APP_UBIQUITY_KEY}`
         }
@@ -71,14 +71,20 @@ function App() {
     }
 
     useEffect(() => {
-        getLatestTransactions();
-        getCurrentBlock();
-        if(currentBlock !== null) {
+        if(defaultProtocol !== ""){
+          getLatestTransactions();
+          getCurrentBlock();
+        }
+
+        if(defaultProtocol !== "" && defaultProtocol !== "algorand") {
+          getBlockIdentifiers();
+        }
+
+        if(currentBlock !== null && defaultProtocol !== "") {
           getBlockTransactions();
         }
-        getBlockIdentifiers();
         // eslint-disable-next-line
-    }, [currentBlock]);
+    }, [currentBlock, defaultProtocol]);
 
     useEffect(() => {
         if(defaultChain === null) {
@@ -92,7 +98,7 @@ function App() {
 
   return (
     <div>
-      <iframe src="https://coinhippo.io?widget=price-marquee&theme=dark" title="Price Update" frameBorder="0" width="100%" height="60"></iframe>
+      {/* <iframe src="https://coinhippo.io?widget=price-marquee&theme=dark" title="Price Update" frameBorder="0" width="100%" height="60"></iframe> */}
       <NavBar onProtocolChangeSubmit={changeDefaultProtocol} />
       <Switch>
         <Route path="/" exact>
@@ -104,7 +110,7 @@ function App() {
         </Route>
 
         <Route path="/explorer" exact>
-          <Explorer latestTransactions={latestTransactions} />
+          <Explorer latestTransactions={latestTransactions} currentProtocol={defaultProtocol} />
         </Route>
 
         <Route path="/accounts/:protocol/:network/:address" exact>
@@ -119,11 +125,11 @@ function App() {
           <NftCollection />
         </Route>
 
-        <Route path="/details/tx/:transactionId" exact>
+        <Route path="/details/tx/:protocol/:transactionId" exact>
           <TxDetails />
         </Route>
 
-        <Route path="/block/:blockNumber" exact>
+        <Route path="/block/:protocol/:blockNumber" exact>
           <BlockTransactions />
         </Route>
       </Switch>

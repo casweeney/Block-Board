@@ -3,8 +3,9 @@ import SearchBar from "../common/SearchBar";
 import { Link } from "react-router-dom";
 import LoadingSpinner from "./UI/LoadingSpinner";
 
-const Explorer = ({ latestTransactions }) => {
-    // console.log(latestTransactions);
+const Explorer = ({ latestTransactions, currentProtocol }) => {
+    console.log(currentProtocol);
+    const dataProtocol = currentProtocol.charAt(0).toUpperCase() + currentProtocol.slice(1);
 
     if(latestTransactions === null) {
         return (
@@ -32,7 +33,7 @@ const Explorer = ({ latestTransactions }) => {
             <div className="container-fluid mt-5">
                 <div className="row">
                     <div className="col-md-12">
-                        <h4 className="text-white text-center mb-5">25 Latest transactions on: <strong>Ethereum</strong></h4>
+                        <h4 className="text-white text-center mb-5 font-weight-lighter">25 Latest transactions on: <span className="font-weight-bold">{dataProtocol} Blockchain</span></h4>
                         <div className="table-responsive">
                             <table className="table table-dark custom-tr table-striped">
                                 <thead>
@@ -48,18 +49,18 @@ const Explorer = ({ latestTransactions }) => {
                                 </thead>
 
                                 <tbody className="micro-text">
-                                    {latestTransactions !== null && 
+                                    {latestTransactions !== null && currentProtocol !== "" &&
                                         latestTransactions.data.length > 0 && 
                                         latestTransactions.data.map((item, index) => (
                                             <tr className="custom-tr" key={item.id}>
                                                 <td>{index + 1}</td>
-                                                <td><Link className="text-info" to={`/details/tx/${item.id}`}>{item.id}</Link></td>
+                                                <td><Link className="text-info" to={`/details/tx/${currentProtocol}/${item.id}`}>{item.id}</Link></td>
                                                 <td>{item.block_number}</td>
                                                 <td>{item.date}</td>
                                                 <td className={item.status === "completed" ? "text-success" : "text-danger"}>{item.status}</td>
                                                 <td>{item.num_events}</td>
                                                 <td>
-                                                    <button className="btn btn-outline-primary btn-sm explore-btn"><Link className="text-white" to={`/details/tx/${item.id}`}>Explore Block</Link></button>
+                                                    <button className="btn btn-outline-primary btn-sm explore-btn"><Link className="text-white" to={`/details/tx/${currentProtocol}/${item.id}`}>Explore Block</Link></button>
                                                 </td>
                                             </tr>
                                         ))

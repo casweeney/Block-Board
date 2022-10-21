@@ -5,12 +5,12 @@ import LoadingSpinner from "./UI/LoadingSpinner";
 
 const BlockTransactions = () => {
     const params = useParams();
-    const { blockNumber } = params;
+    const { protocol, blockNumber } = params;
 
     const [blockTransactions, setBlockTransactions] = useState(null);
 
     const getBlockTransactions = async () => {
-        const response = await fetch(`https://ubiquity.api.blockdaemon.com/v1/ethereum/mainnet/block/${blockNumber}`, {
+        const response = await fetch(`https://ubiquity.api.blockdaemon.com/v1/${protocol}/mainnet/block/${blockNumber}`, {
           headers: {Authorization: `Bearer ${process.env.REACT_APP_UBIQUITY_KEY}`}
         });
   
@@ -50,7 +50,7 @@ const BlockTransactions = () => {
             <div className="container-fluid mt-5">
                 <div className="row">
                     <div className="col-md-12">
-                        <h4 className="text-white text-center mb-5">{blockTransactions.txs.length} transactions on ethereum block: <strong>{blockNumber}</strong></h4>
+                        <h4 className="text-white text-center mb-5">{blockTransactions.txs.length} transactions on {protocol} block: <strong>{blockNumber}</strong></h4>
                         <div className="table-responsive">
                             <table className="table table-dark custom-tr table-striped">
                                 <thead>
@@ -71,13 +71,13 @@ const BlockTransactions = () => {
                                         blockTransactions.txs.map((item, index) => (
                                             <tr className="custom-tr" key={item.id}>
                                                 <td>{index + 1}</td>
-                                                <td><Link className="text-info" to={`/details/tx/${item.id}`}>{item.id}</Link></td>
-                                                <td>{item.block_number}</td>
+                                                <td><Link className="text-info" to={`/details/tx/${protocol}/${item.id}`}>{item.id}</Link></td>
+                                                <td>{protocol === "bitcoin" ? blockTransactions.number : item.block_number}</td>
                                                 <td>{item.date}</td>
                                                 <td className={item.status === "completed" ? "text-success" : "text-danger"}>{item.status}</td>
                                                 <td>{item.num_events}</td>
                                                 <td>
-                                                    <button className="btn btn-outline-primary btn-sm explore-btn"><Link className="text-white" to={`/details/tx/${item.id}`}>Explore Block</Link></button>
+                                                    <button className="btn btn-outline-primary btn-sm explore-btn"><Link className="text-white" to={`/details/tx/${protocol}/${item.id}`}>Explore Block</Link></button>
                                                 </td>
                                             </tr>
                                         ))

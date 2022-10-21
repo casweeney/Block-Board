@@ -34,8 +34,6 @@ const SearchBar = () => {
         getCurrentBlock();
     }, []);
 
-    console.log(protocol);
-
     const accountSubmitHandler = (e) => {
         e.preventDefault();
 
@@ -43,16 +41,32 @@ const SearchBar = () => {
             alert("Pass an account address and select protocol");
         } else {
 
-            if(account.length === 66){
-                history.push(`/details/tx/${account}`);
+            if(protocol === "ethereum") {
+                if(account.length === 66){
+                    history.push(`/details/tx/${protocol}/${account}`);
+                }
+    
+                if(account.length === 42) {
+                    history.push(`/accounts/${protocol}/mainnet/${account}`);
+                }
+    
+                if(account.length <= String(currentBlock).length) {
+                    history.push(`/block/${protocol}/${account}`);
+                }
             }
 
-            if(account.length === 42) {
-                history.push(`/accounts/${protocol}/mainnet/${account}`);
-            }
-
-            if(account.length <= String(currentBlock).length) {
-                history.push(`/block/${account}`);
+            if(protocol === "bitcoin") {
+                if(account.length === 64){
+                    history.push(`/details/tx/${protocol}/${account}`);
+                }
+    
+                if(account.length === 42) {
+                    history.push(`/accounts/${protocol}/mainnet/${account}`);
+                }
+    
+                if(account.length <= String(currentBlock).length) {
+                    history.push(`/block/${protocol}/${account}`);
+                }
             }
             
             setAccount("");

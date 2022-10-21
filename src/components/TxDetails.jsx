@@ -6,12 +6,14 @@ const TxDetails = () => {
     const [transactionDetails, setTransactionDetails] = useState(null);
 
     const params = useParams();
-    const { transactionId } = params;
+    const { protocol, transactionId } = params;
+
+    const dataProtocol = protocol.charAt(0).toUpperCase() + protocol.slice(1);
 
     // console.log(transactionId);
 
     const getTransctionById = async () => {
-        const response = await fetch(`https://ubiquity.api.blockdaemon.com/v1/ethereum/mainnet/tx/${transactionId}`, {
+        const response = await fetch(`https://ubiquity.api.blockdaemon.com/v1/${protocol}/mainnet/tx/${transactionId}`, {
           headers: {
             Authorization: `Bearer ${process.env.REACT_APP_UBIQUITY_KEY}`
           }
@@ -42,6 +44,7 @@ const TxDetails = () => {
                 <div className="container">
                     <div className="row">
                         <div className="col-md-12" style={{ overflowX: "scroll" }}>
+                            <p className="text-white" style={{ fontSize: "24px"}}><span className="text-primary font-weight-bold mr-5">Blockchain: </span>{dataProtocol}</p>
                             <p className="text-white"><span className="text-primary font-weight-bold mr-5">Txn Hash: </span>{transactionDetails != null ? transactionDetails.id : "loading..."}</p>
                             <p className="text-white"><span className="text-primary font-weight-bold mr-5">Block: </span>{transactionDetails != null ? transactionDetails.block_number : "loading..."}</p>
                         </div>
@@ -79,7 +82,7 @@ const TxDetails = () => {
                                                                             <p>To: {event.destination}</p>
                                                                         }
 
-                                                                        {event.type === "fee" &&
+                                                                        {protocol === "ethereum" && event.type === "fee" &&
                                                                             <div>
                                                                                 <h6 className="font-weight-bold">Meta data</h6>
                                                                                 <p>Base fee: {event.meta.base_fee}</p>
