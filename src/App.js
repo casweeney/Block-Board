@@ -22,7 +22,13 @@ function App() {
     let defaultChain = localStorage.getItem('defaultProtocol');
 
     const changeDefaultProtocol = (defaultProtocol) => {
+      setCurrentBlock(null);
+      setBlockTransactions(null);
+      setBlockIdentifiers(null);
+      setLatestTransactions(null);
       localStorage.setItem("defaultProtocol", JSON.stringify(defaultProtocol));
+      defaultChain = JSON.parse(localStorage.getItem('defaultProtocol'));
+      setDefaultProtocol(defaultChain);
       alert("Default protocol changed");
     }
 
@@ -72,12 +78,9 @@ function App() {
 
     useEffect(() => {
         if(defaultProtocol !== ""){
-          getLatestTransactions();
           getCurrentBlock();
-        }
-
-        if(defaultProtocol !== "" && defaultProtocol !== "algorand") {
           getBlockIdentifiers();
+          getLatestTransactions();
         }
 
         if(currentBlock !== null && defaultProtocol !== "") {
@@ -85,6 +88,8 @@ function App() {
         }
         // eslint-disable-next-line
     }, [currentBlock, defaultProtocol]);
+
+
 
     useEffect(() => {
         if(defaultChain === null) {

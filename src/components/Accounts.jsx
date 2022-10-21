@@ -142,16 +142,21 @@ const Accounts = () => {
                                         txn.map((innerTxn, innerIndex) => (
                                             <tr className="custom-tr" key={innerTxn.id}>
                                                 <td><span><i className="fa fa-cube"></i></span></td>
-                                                <td><Link className="text-info" to={`/details/tx/${innerTxn.transaction_id}`}>{innerTxn.transaction_id.slice(0,10)}...{innerTxn.transaction_id.slice(-10)}</Link></td>
+                                                <td><Link className="text-info" to={`/details/tx/${protocol}/${innerTxn.transaction_id}`}>{innerTxn.transaction_id.slice(0,10)}...{innerTxn.transaction_id.slice(-10)}</Link></td>
                                                 <td>{innerTxn.type}</td>
                                                 <td>{innerTxn.date}</td>
-                                                <td>{innerTxn.source.slice(0,6)}...{innerTxn.source.slice(-6)}</td>
-                                                <td>{innerTxn.destination ? `${innerTxn.destination.slice(0,6)}...${innerTxn.destination.slice(-6)}` : "Ethereum"}</td>
+                                                {protocol === "ethereum" ?
+                                                    <td>{innerTxn.source.slice(0,6)}...{innerTxn.source.slice(-6)}</td>
+                                                    :
+                                                    <td>EOA</td>
+                                                }
+                                                
+                                                <td>{innerTxn.destination ? `${innerTxn.destination.slice(0,6)}...${innerTxn.destination.slice(-6)}` : protocol}</td>
                                                 <td>
                                                     <span className="badge badge-pill badge-success px-2 py-1">{innerTxn.amount}</span>
                                                 </td>
                                                 <td>
-                                                    <button className="btn btn-outline-primary btn-sm explore-btn"><Link className="text-white" to={`/details/tx/${innerTxn.transaction_id}`}>Explore Block</Link></button>
+                                                    <button className="btn btn-outline-primary btn-sm explore-btn"><Link className="text-white" to={`/details/tx/${protocol}/${innerTxn.transaction_id}`}>Explore Block</Link></button>
                                                 </td>
                                             </tr>
                                         ))
