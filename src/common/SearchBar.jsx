@@ -34,8 +34,6 @@ const SearchBar = () => {
         getCurrentBlock();
     }, []);
 
-    console.log(protocol);
-
     const accountSubmitHandler = (e) => {
         e.preventDefault();
 
@@ -43,16 +41,110 @@ const SearchBar = () => {
             alert("Pass an account address and select protocol");
         } else {
 
-            if(account.length === 66){
-                history.push(`/details/tx/${account}`);
+            // First chain
+            if(protocol === "ethereum") {
+                if(account.length === 66){
+                    history.push(`/details/tx/${protocol}/${account}`);
+                }
+    
+                if(account.length === 42) {
+                    history.push(`/accounts/${protocol}/mainnet/${account}`);
+                }
+    
+                if(account.length <= String(currentBlock).length) {
+                    history.push(`/block/${protocol}/${account}`);
+                }
             }
 
-            if(account.length === 42) {
-                history.push(`/accounts/${protocol}/mainnet/${account}`);
+            // Second chain
+            if(protocol === "bitcoin") {
+                if(account.length === 64){
+                    history.push(`/details/tx/${protocol}/${account}`);
+                }
+    
+                if(account.length === 42) {
+                    history.push(`/accounts/${protocol}/mainnet/${account}`);
+                }
+    
+                if(account.length <= String(currentBlock).length) {
+                    history.push(`/block/${protocol}/${account}`);
+                }
             }
 
-            if(account.length <= String(currentBlock).length) {
-                history.push(`/block/${account}`);
+            // Third chain
+            if(protocol === "bitcoincash") {
+                if(account.length === 64){
+                    history.push(`/details/tx/${protocol}/${account}`);
+                }
+    
+                if(account.length === 42) {
+                    history.push(`/accounts/${protocol}/mainnet/${account}`);
+                }
+    
+                if(account.length <= String(currentBlock).length) {
+                    history.push(`/block/${protocol}/${account}`);
+                }
+            }
+
+            // Fourth chain
+            if(protocol === "dogecoin") {
+                if(account.length === 64){
+                    history.push(`/details/tx/${protocol}/${account}`);
+                }
+    
+                if(account.length === 34) {
+                    history.push(`/accounts/${protocol}/mainnet/${account}`);
+                }
+    
+                if(account.length <= String(currentBlock).length) {
+                    history.push(`/block/${protocol}/${account}`);
+                }
+            }
+
+            // Fifth chain
+            if(protocol === "polkadot") {
+                if(account.length === 10){
+                    history.push(`/details/tx/${protocol}/${account}`);
+                }
+    
+                if(account.length === 48) {
+                    history.push(`/accounts/${protocol}/mainnet/${account}`);
+                }
+    
+                if(account.length <= String(currentBlock).length) {
+                    history.push(`/block/${protocol}/${account}`);
+                }
+            }
+
+            // Sixth chain
+            if(protocol === "tezos") {
+                if(account.length === 51){
+                    history.push(`/details/tx/${protocol}/${account}`);
+                }
+    
+                if(account.length === 36) {
+                    history.push(`/accounts/${protocol}/mainnet/${account}`);
+                }
+    
+                if(account.length <= String(currentBlock).length) {
+                    history.push(`/block/${protocol}/${account}`);
+                }
+            }
+
+            // Seventh chain
+            if(protocol === "litecoin") {
+                
+                if(account.length === 64){
+                    history.push(`/details/tx/${protocol}/${account}`);
+                }
+    
+                if(account.length >= 34 && account.length <= 43) {
+                    history.push(`/accounts/${protocol}/mainnet/${account}`);
+                }
+
+                if(account.length <= String(currentBlock).length) {
+                    history.push(`/block/${protocol}/${account}`);
+                }
             }
             
             setAccount("");

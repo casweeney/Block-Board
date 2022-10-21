@@ -3,17 +3,24 @@ import { Link } from 'react-router-dom';
 import SearchBar from "../common/SearchBar";
 
 const Transactions = ({defaultProtocol, blockIdentifiers, blockTransactions}) => {
-
     const dataProtocol = defaultProtocol.charAt(0).toUpperCase() + defaultProtocol.slice(1);
-    console.log(defaultProtocol);
-    console.log(dataProtocol);
+    // console.log(defaultProtocol);
+    // console.log(dataProtocol);
 
-    
+    console.log(defaultProtocol, " Transactions: ", blockTransactions);
+
+    const DisplayBlockTransactions = () => {
+        if(blockTransactions === null) {
+            console.log("Null");
+            return;
+        }
+    }
 
     return (
         <main className="extra-dark pb-5">
             <div className="search-holder pt-4 pb-4">
                 <div className="container">
+                    <h3 className="text-white text-center mb-3">Explore {dataProtocol} Blockchain</h3>
                     <div className="row">
                         <div className="col-md-2"></div>
                         <div className="col-md-8">
@@ -26,10 +33,11 @@ const Transactions = ({defaultProtocol, blockIdentifiers, blockTransactions}) =>
 
             <div className="container">
                 <div className="row mt-5" style={{ alignItems: "center" }}>
-                    <div className="col-md-6 mb-4" style={{ overflowX: "scroll" }}>
-                        <iframe src={`https://coinhippo.io/token/${defaultProtocol}?view=widget&theme=dark`} title={dataProtocol} frameBorder="0" width="500" height="240"></iframe>
-                    </div>
                     
+                    <div className="col-md-6 mb-4" style={{ overflowX: "scroll" }}>
+                        <iframe src={`https://coinhippo.io/token/${defaultProtocol === "bitcoincash" ? "bitcoin-cash" : defaultProtocol}?view=widget&theme=dark`} title={dataProtocol} frameBorder="0" width="500" height="240"></iframe>
+                    </div>
+
                     <div className="col-md-6">
                         <div className="row" style={{ alignItems: "center" }}>
                             <div className="col-md-12">
@@ -41,6 +49,11 @@ const Transactions = ({defaultProtocol, blockIdentifiers, blockTransactions}) =>
                             </div>
                         </div>
                     </div>
+
+                    {/* <div className="col-md-6">
+                        <iframe src="https://coinhippo.io?widget=dominance&theme=dark" title="Dominance" frameBorder="0" width="500" height="320"></iframe>
+                    </div> */}
+
                 </div>
 
                 <div className="row mt-5">
@@ -48,7 +61,7 @@ const Transactions = ({defaultProtocol, blockIdentifiers, blockTransactions}) =>
                         <div className="card table-card pb-3">
                             <div className="card-body">
                                 <div style={{ display: "flex", justifyContent: "space-between"}}>
-                                    <h6 className="mb-5 text-primary">Latest Block Transactions</h6>
+                                    <h6 className="mb-5 text-info">{dataProtocol} Latest Block Transactions</h6>
                                     {/* <h6 className="mb-5 text-white-50">View All</h6> */}
                                 </div>
                                 
@@ -61,11 +74,11 @@ const Transactions = ({defaultProtocol, blockIdentifiers, blockTransactions}) =>
                                                         <span><i className="fa fa-cube"></i></span>
                                                         <p>
                                                             Block: <br />
-                                                            {txn.block_number}
+                                                            {defaultProtocol === "bitcoin" ? blockTransactions.number : txn.block_number}
                                                         </p>
                                                         <p>
                                                             Txn: <br />
-                                                            <Link className="text-info" to={`/details/tx/${txn.id}`}>{txn.id.slice(0,6)}...{txn.id.slice(-6)}</Link>
+                                                            <Link className="text-info" to={`/details/tx/${defaultProtocol}/${txn.id}`}>{txn.id.slice(0,6)}...{txn.id.slice(-6)}</Link>
                                                         </p>
                                                         <p>
                                                             Date: <br />
@@ -99,7 +112,7 @@ const Transactions = ({defaultProtocol, blockIdentifiers, blockTransactions}) =>
                         <div className="card table-card pb-3">
                             <div className="card-body">
                                 <div style={{ display: "flex", justifyContent: "space-between"}}>
-                                    <h6 className="mb-5 text-primary">Blocks Identifiers</h6>
+                                    <h6 className="mb-5 text-info">{dataProtocol} Blocks Identifiers</h6>
                                     {/* <h6 className="mb-5 text-white-50">View All</h6> */}
                                 </div>
                                 
