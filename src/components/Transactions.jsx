@@ -19,7 +19,7 @@ const Transactions = ({defaultProtocol, blockIdentifiers, blockTransactions}) =>
     return (
         <main className="extra-dark pb-5">
             <div className="search-holder pt-4 pb-4">
-                <div className="container">
+                <div className="container-fluid">
                     <h3 className="text-white text-center mb-3">Explore {dataProtocol} Blockchain</h3>
                     <div className="row">
                         <div className="col-md-2"></div>
@@ -31,28 +31,40 @@ const Transactions = ({defaultProtocol, blockIdentifiers, blockTransactions}) =>
                 </div>
             </div>
 
-            <div className="container">
-                <div className="row mt-5" style={{ alignItems: "center" }}>
-                    
-                    <div className="col-md-6 mb-4" style={{ overflowX: "scroll" }}>
-                        <iframe src={`https://coinhippo.io/token/${defaultProtocol === "bitcoincash" ? "bitcoin-cash" : defaultProtocol}?view=widget&theme=dark`} title={dataProtocol} frameBorder="0" width="500" height="240"></iframe>
-                    </div>
-
-                    <div className="col-md-6">
+            <div className="container-fluid">
+                <div className="row mt-4 mb-3" style={{ alignItems: "center" }}>
+                    <div className="col-md-12 mb-3">
                         <div className="row" style={{ alignItems: "center" }}>
                             <div className="col-md-12">
-                                <div className="card bg-dark-gray text-white">
-                                    <div className="card-body">
+                                <div className="card text-white" style={{ backgroundColor: "#0F172A" }}>
+                                    <div className="card-body text-center">
                                         <h5 style={{ lineHeight: "1.5" }}>Track your transactions in one place across multiple blockchains, not all over the place.</h5>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
+                    
+                    <div className="col-md-3">
+                        <div className="col-md-12 mb-4" style={{ overflowX: "scroll" }}>
+                            <iframe src={`https://coinhippo.io/token/${defaultProtocol === "bitcoincash" ? "bitcoin-cash" : defaultProtocol}?view=widget&theme=dark`} title={dataProtocol} frameBorder="0" width="320" height="240"></iframe>
+                        </div>
+                    </div>
 
-                    {/* <div className="col-md-6">
-                        <iframe src="https://coinhippo.io?widget=dominance&theme=dark" title="Dominance" frameBorder="0" width="500" height="320"></iframe>
-                    </div> */}
+
+                    <div className="col-md-3">
+                        <div className="col-md-12">
+                            {/* <iframe src="https://coinhippo.io?widget=top-movers&theme=dark" title="Top Gainers/Losers" frameBorder="0" width="320" height="320"></iframe> */}
+                        </div>
+                    </div>
+
+                    <div className="col-md-3">
+                        {/* <iframe src="https://coinhippo.io?widget=dominance&theme=dark" title="Dominance" frameBorder="0" width="320" height="320"></iframe> */}
+                    </div>
+
+                    <div className="col-md-3">
+                        {/* <iframe src="https://coinhippo.io?widget=trending&theme=dark" title="Trending Search" frameBorder="0" width="320" height="320"></iframe> */}
+                    </div>
 
                 </div>
 

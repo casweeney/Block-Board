@@ -14,6 +14,10 @@ body {
     background-color: #232530;
 }
 
+.bg-dark-blue {
+    background-color: #0F172A;
+}
+
 .navbar-brand {
     font-size: 24px !important;
 }
@@ -53,7 +57,7 @@ body {
 
 
 .search-holder {
-    background-color: #20222C;
+    background-color: #0F172A;
 }
 
 .search-gray {
@@ -125,4 +129,28 @@ body {
 
 .search-input {
     flex: 1;
+}
+
+.bid-btn {
+    background: linear-gradient(65.58deg, rgba(0, 66, 255, 0.5) -11.84%, rgba(235, 0, 27, 0.5) 98.75%);
+    border: none;
+}
+
+.nft-card {
+    box-sizing: border-box;
+    border-radius: 8px;
+}
+
+.card-body {
+    padding: 8px !important;
+}
+
+.module-border-wrap {
+    /* max-width: 250px; */
+    padding: 1rem;
+    position: relative;
+    /* background: linear-gradient(to bottom, #FFA500, #33FF00); */
+    background: linear-gradient(65.58deg, rgba(0, 66, 255, 0.5) -11.84%, rgba(235, 0, 27, 0.5) 98.75%);
+    padding: 2px;
+    border-radius: 8px;
 }
