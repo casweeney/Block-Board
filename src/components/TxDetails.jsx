@@ -55,7 +55,7 @@ const TxDetails = () => {
             <div className="container mt-5">
                 <div className="row">
                     <div className="col-md-12">
-                        <div className="card bg-dark-gray">
+                        <div className="card bg-dark-blue">
                             <div className="card-body">
                                 <h5 className="text-danger mb-5">Transaction Details</h5>
                                 <div className="row">
