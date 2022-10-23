@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { ethers } from "ethers";
 import { useParams, Link } from 'react-router-dom';
+import moment from 'moment'
+
 import SearchBar from "../common/SearchBar";
 import LoadingSpinner from "./UI/LoadingSpinner";
 
@@ -110,7 +112,7 @@ const Accounts = () => {
 
                                     <div className="col-md-6 col-6">
                                         <h5 className="text-white">{accountDetails.name}: {accountDetails.balance !== "N/A" && parseFloat(ethers.utils.formatUnits(accountDetails.balance, accountDetails.decimal)).toFixed(6)} ({accountDetails.symbol})</h5>
-                                        <h2 className="text-primary">$7.22</h2>
+                                        <h2 className="text-info">$7.22</h2>
                                     </div>
                                 </div>
                             </div>
@@ -144,7 +146,7 @@ const Accounts = () => {
                                                 <td><span><i className="fa fa-cube"></i></span></td>
                                                 <td><Link className="text-info" to={`/details/tx/${protocol}/${innerTxn.transaction_id}`}>{innerTxn.transaction_id.slice(0,10)}...{innerTxn.transaction_id.slice(-10)}</Link></td>
                                                 <td>{innerTxn.type}</td>
-                                                <td>{innerTxn.date}</td>
+                                                <td>{moment.unix(innerTxn.date, "YYYYMMDD").fromNow()}</td>
                                                 {protocol === "ethereum" ?
                                                     <td>{innerTxn.source.slice(0,6)}...{innerTxn.source.slice(-6)}</td>
                                                     :
@@ -153,7 +155,7 @@ const Accounts = () => {
                                                 
                                                 <td>{innerTxn.destination ? `${innerTxn.destination.slice(0,6)}...${innerTxn.destination.slice(-6)}` : protocol}</td>
                                                 <td>
-                                                    <span className="badge badge-pill badge-success px-2 py-1">{innerTxn.amount}</span>
+                                                    <span className="badge badge-pill badge-success px-2 py-1">{innerTxn.amount / (1 * 10 ** innerTxn.decimal)}</span>
                                                 </td>
                                                 <td>
                                                     <button className="btn btn-outline-primary btn-sm explore-btn"><Link className="text-white" to={`/details/tx/${protocol}/${innerTxn.transaction_id}`}>Explore Block</Link></button>

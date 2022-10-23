@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import moment from 'moment';
 import SearchBar from "../common/SearchBar";
 import { Link, useParams } from "react-router-dom";
 import LoadingSpinner from "./UI/LoadingSpinner";
@@ -73,7 +74,7 @@ const BlockTransactions = () => {
                                                 <td>{index + 1}</td>
                                                 <td><Link className="text-info" to={`/details/tx/${protocol}/${item.id}`}>{item.id}</Link></td>
                                                 <td>{protocol === "bitcoin" ? blockTransactions.number : item.block_number}</td>
-                                                <td>{item.date}</td>
+                                                <td>{moment.unix(item.date).fromNow()}</td>
                                                 <td className={item.status === "completed" ? "text-success" : "text-danger"}>{item.status}</td>
                                                 <td>{item.num_events}</td>
                                                 <td>
