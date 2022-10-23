@@ -1,4 +1,5 @@
 import React from 'react';
+import moment from 'moment';
 import SearchBar from "../common/SearchBar";
 import { Link } from "react-router-dom";
 import LoadingSpinner from "./UI/LoadingSpinner";
@@ -56,7 +57,7 @@ const Explorer = ({ latestTransactions, currentProtocol }) => {
                                                 <td>{index + 1}</td>
                                                 <td><Link className="text-info" to={`/details/tx/${currentProtocol}/${item.id}`}>{item.id}</Link></td>
                                                 <td>{item.block_number}</td>
-                                                <td>{item.date}</td>
+                                                <td>{moment.unix(item.date).fromNow()}</td>
                                                 <td className={item.status === "completed" ? "text-success" : "text-danger"}>{item.status}</td>
                                                 <td>{item.num_events}</td>
                                                 <td>

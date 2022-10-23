@@ -1,20 +1,12 @@
 import React from 'react';
+import moment from 'moment';
 import { Link } from 'react-router-dom';
 import SearchBar from "../common/SearchBar";
 
 const Transactions = ({defaultProtocol, blockIdentifiers, blockTransactions}) => {
     const dataProtocol = defaultProtocol.charAt(0).toUpperCase() + defaultProtocol.slice(1);
-    // console.log(defaultProtocol);
-    // console.log(dataProtocol);
 
     console.log(defaultProtocol, " Transactions: ", blockTransactions);
-
-    const DisplayBlockTransactions = () => {
-        if(blockTransactions === null) {
-            console.log("Null");
-            return;
-        }
-    }
 
     return (
         <main className="extra-dark pb-5">
@@ -52,19 +44,19 @@ const Transactions = ({defaultProtocol, blockIdentifiers, blockTransactions}) =>
                     </div>
 
 
-                    <div className="col-md-3">
+                    {/* <div className="col-md-3">
                         <div className="col-md-12">
-                            {/* <iframe src="https://coinhippo.io?widget=top-movers&theme=dark" title="Top Gainers/Losers" frameBorder="0" width="320" height="320"></iframe> */}
+                            <iframe src="https://coinhippo.io?widget=top-movers&theme=dark" title="Top Gainers/Losers" frameBorder="0" width="320" height="320"></iframe>
                         </div>
-                    </div>
+                    </div> */}
 
-                    <div className="col-md-3">
-                        {/* <iframe src="https://coinhippo.io?widget=dominance&theme=dark" title="Dominance" frameBorder="0" width="320" height="320"></iframe> */}
-                    </div>
+                    {/* <div className="col-md-3">
+                        <iframe src="https://coinhippo.io?widget=dominance&theme=dark" title="Dominance" frameBorder="0" width="320" height="320"></iframe>
+                    </div> */}
 
-                    <div className="col-md-3">
-                        {/* <iframe src="https://coinhippo.io?widget=trending&theme=dark" title="Trending Search" frameBorder="0" width="320" height="320"></iframe> */}
-                    </div>
+                    {/* <div className="col-md-3">
+                        <iframe src="https://coinhippo.io?widget=trending&theme=dark" title="Trending Search" frameBorder="0" width="320" height="320"></iframe>
+                    </div> */}
 
                 </div>
 
@@ -93,8 +85,8 @@ const Transactions = ({defaultProtocol, blockIdentifiers, blockTransactions}) =>
                                                             <Link className="text-info" to={`/details/tx/${defaultProtocol}/${txn.id}`}>{txn.id.slice(0,6)}...{txn.id.slice(-6)}</Link>
                                                         </p>
                                                         <p>
-                                                            Date: <br />
-                                                            <span className="text-warning">{txn.date}</span>
+                                                            Age: <br />
+                                                            <span className="text-warning">{moment.unix(txn.date).fromNow()}</span>
                                                         </p>
                                                         <p className={txn.status === "completed" ? "text-success" : "text-danger"}>{txn.status}</p>
                                                         {/* <p>{innerTxn.amount}ETH</p> */}
@@ -144,8 +136,8 @@ const Transactions = ({defaultProtocol, blockIdentifiers, blockTransactions}) =>
                                                             {txn.parent_id.slice(0,6)} ... {txn.parent_id.slice(-6)}
                                                         </p>
                                                         <p>
-                                                            Date: <br />
-                                                            <span className="text-warning">{txn.date}</span>
+                                                            Age: <br />
+                                                            <span className="text-warning">{moment.unix(txn.date).fromNow()}</span>
                                                         </p>
                                                     </div>
                                                 </div>

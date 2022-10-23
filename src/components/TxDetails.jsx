@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from "react-router-dom";
+import moment from 'moment';
 import LoadingSpinner from "./UI/LoadingSpinner";
 
 const TxDetails = () => {
@@ -11,6 +12,7 @@ const TxDetails = () => {
     const dataProtocol = protocol.charAt(0).toUpperCase() + protocol.slice(1);
 
     // console.log(transactionId);
+    console.log(transactionDetails);
 
     const getTransctionById = async () => {
         const response = await fetch(`https://ubiquity.api.blockdaemon.com/v1/${protocol}/mainnet/tx/${transactionId}`, {
@@ -44,9 +46,9 @@ const TxDetails = () => {
                 <div className="container">
                     <div className="row">
                         <div className="col-md-12" style={{ overflowX: "scroll" }}>
-                            <p className="text-white" style={{ fontSize: "24px"}}><span className="text-primary font-weight-bold mr-5">Blockchain: </span>{dataProtocol}</p>
-                            <p className="text-white"><span className="text-primary font-weight-bold mr-5">Txn Hash: </span>{transactionDetails != null ? transactionDetails.id : "loading..."}</p>
-                            <p className="text-white"><span className="text-primary font-weight-bold mr-5">Block: </span>{transactionDetails != null ? transactionDetails.block_number : "loading..."}</p>
+                            <p className="text-white" style={{ fontSize: "24px"}}><span className="text-info font-weight-bold mr-5">Blockchain: </span>{dataProtocol}</p>
+                            <p className="text-white"><span className="text-info font-weight-bold mr-5">Txn Hash: </span>{transactionDetails != null ? transactionDetails.id : "loading..."}</p>
+                            <p className="text-white"><span className="text-info font-weight-bold mr-5">Block: </span>{transactionDetails != null ? transactionDetails.block_number : "loading..."}</p>
                         </div>
                     </div>
                 </div>
@@ -65,18 +67,19 @@ const TxDetails = () => {
                                                 <div className="micro-text table-responsive">
                                                     <p>Transaction Hash: {transactionDetails.id}</p>
                                                     <p>Status: <span className={transactionDetails.status === "completed" ? "text-success" : "text-danger"}>{transactionDetails.status}</span></p>
-                                                    <p>Timestamp: {transactionDetails.date}</p>
+                                                    <p>Timestamp: {moment.unix(transactionDetails.date).fromNow()}</p>
                                                     <p>Confirmations: {transactionDetails.confirmations}</p>
-                                                    <h5>Events ({transactionDetails.num_events}):</h5>
+                                                    <h5>Transaction Events ({transactionDetails.num_events}):</h5>
                                                     <div className="row">
                                                         {transactionDetails.events.length > 0 && transactionDetails.events.map((event) => (
                                                             <div className="col-md-12 mb-3" key={event.id}>
-                                                                <div className="card bg-dark-gray">
+                                                                <div className="card bg-dark-dark">
                                                                     <div className="card-body">
                                                                         <p className="font-weight-bold">Transaction Type: {event.type}</p>
                                                                         <hr className="border-white" />
-                                                                        <p>Amount: {event.amount}</p>
-                                                                        <p>Decimals: {event.denomination}</p>
+                                                                        <p className="font-weight-bold text-info">Amount: {event.amount / (1 * 10 ** event.decimals)}</p>
+                                                                        <p>Denomination: {event.denomination}</p>
+                                                                        <p>Decimals: {event.decimals}</p>
                                                                         <p>From: {event.source}</p>
                                                                         {event.type === "transfer" &&
                                                                             <p>To: {event.destination}</p>
