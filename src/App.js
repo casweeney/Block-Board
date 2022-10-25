@@ -126,7 +126,7 @@ function App() {
           <StakingReports />
         </Route>
 
-        <Route path="/nft-collections" exact>
+        <Route path="/nft-collections/:address" exact>
           <NftCollection />
         </Route>
 
