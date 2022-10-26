@@ -99,7 +99,11 @@ const NftDetails = () => {
             </div>
 
             <div className="container mt-5">
-                <h2 className="text-white text-center mb-5">{nftDetails.asset.name} #{nftDetails.asset.token_id}</h2>
+                <div className="row mb-3">
+                    <div className="col-md-12" style={{ overflowX: "scroll" }}>
+                        <h2 className="text-white text-center mb-5">{nftDetails.asset.name} #{nftDetails.asset.token_id}</h2>
+                    </div>
+                </div>
                 <div className="row">
                     <div className="col-md-5">
                         <div className="module-border-wrap">  
@@ -138,7 +142,7 @@ const NftDetails = () => {
                         </div>
 
                         <div className="card extra-dark border-blue mb-3">
-                            <div className="card-body">
+                            <div className="card-body" style={{ overflowX: "scroll" }}>
                                 <h5 className="underline">Details</h5>
                                 <p className="flex-between">
                                     Contract Address 
