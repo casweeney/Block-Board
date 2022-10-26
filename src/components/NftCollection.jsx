@@ -134,10 +134,10 @@ const NftCollection = () => {
 
             <div className="container-fluid mt-5">
                 <h5 className="text-white">Explore Popular Collections</h5>
-                <OwlCarousel items={10} margin={8} autoplay={true} loop={true}>
+                <OwlCarousel items={8} margin={8} autoplay={true} loop={true}>
                     {collections.data.length > 0 && collections.data.map((collection, index) => {
                         return (
-                            <div key={index}>
+                            <div className='item' key={index}>
                                 <a href={`/nft-collections/4203aedd-7964-5fe1-b932-eb8c4fda7822`} className="btn btn-dark btn-block" style={{ fontSize: "10px" }}>
                                     <img src={`/nft/${index + 1}.png`} className="img-fluid rounded" alt="" />
                                     {collection.name === "" ? "No Name" : collection.name}
