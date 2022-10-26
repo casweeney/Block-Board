@@ -6,12 +6,24 @@ body {
     background: #000 !important;
 }
 
+.border-blue {
+    border-color: #4FB4C5;
+}
+
 .main {
     height: 100%;
 }
 
 .bg-dark-gray {
     background-color: #232530;
+}
+
+.text-gray {
+    color: #ccc;
+}
+
+.underline {
+    text-decoration: underline;
 }
 
 .bg-dark-blue {
@@ -25,6 +37,11 @@ body {
 
 .navbar-brand {
     font-size: 24px !important;
+}
+
+.flex-between {
+    display: flex;
+    justify-content: space-between;
 }
 
 .nav-link {

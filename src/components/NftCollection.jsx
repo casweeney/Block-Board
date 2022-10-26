@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { useHistory, useParams } from "react-router-dom";
+import { Link, useHistory, useParams } from "react-router-dom";
+import LoadingSpinner from "./UI/LoadingSpinner";
 
 const NftCollection = () => {
     const params = useParams();
@@ -30,7 +31,7 @@ const NftCollection = () => {
     }
 
     const getNfts = async () => {
-        if(account === "xxx") {
+        if(account === "default") {
             const response = await fetch(`https://ubiquity.api.blockdaemon.com/nft/v1/ethereum/mainnet/assets?collection_id=4203aedd-7964-5fe1-b932-eb8c4fda7822`, {
                 headers: {
                     Authorization: `Bearer ${process.env.REACT_APP_UBIQUITY_KEY}`
@@ -63,6 +64,15 @@ const NftCollection = () => {
     }, [address]);
 
     console.log(nfts);
+
+    if(nfts === null) {
+        return (
+            <div className="text-center mt-5">
+                <LoadingSpinner />
+                <h3 className="text-center text-white mt-3">Loading...</h3>
+            </div>
+        )
+    }
     
     return (
         <main className="extra-dark pb-5">
@@ -104,15 +114,18 @@ const NftCollection = () => {
                         }
 
                         return (
-                            <div className="col-md-3 mb-3" key={nft.id}>
+                            <div className="col-md-3 col-sm-6 col-6 mb-3" key={nft.id}>
                                 <div className="module-border-wrap">  
                                     <div className="card extra-dark nft-card">
-                                        {nft.image_url === "" ? <img src="/nft/noimage2.webp" alt="" /> : <img className="card-img-top" src={`https://ubiquity.api.blockdaemon.com/nft/v1/ethereum/mainnet/media/${imgUrl}?apiKey=${process.env.REACT_APP_UBIQUITY_KEY}`} alt="Card image" />}
+                                        <Link to={`/nft-details/${nft.id}`}>
+                                            {nft.image_url === "" ? <img src="/nft/noimage2.webp" className="card-img-top" alt="" /> : <img className="card-img-top" src={`https://ubiquity.api.blockdaemon.com/nft/v1/ethereum/mainnet/media/${imgUrl}?apiKey=${process.env.REACT_APP_UBIQUITY_KEY}`} alt="Card image" />}
+                                        </Link>
+                                        
                                         <div className="card-body text-white">
                                             <h5 className="mt-2">{nft.name}</h5>
                                             <p className="text-info">ID: {nft.token_id}</p>
-                                            <p style={{ fontSize: "12px" }}>Contract: {nft.contract_address.slice(0,6)} ... {nft.contract_address.slice(-6)}</p>
-                                            <button className="btn btn-secondary bid-btn pl-5 pr-5 pt-2 pb-2">Place a bid</button>
+                                            <p style={{ fontSize: "11px" }}>Contract: {nft.contract_address}</p>
+                                            <Link to={`/nft-details/${nft.id}`} className="btn btn-secondary btn-block bid-btn pl-5 pr-5 pt-2 pb-2">Details</Link>
                                         </div>
                                     </div>
                                 </div>
