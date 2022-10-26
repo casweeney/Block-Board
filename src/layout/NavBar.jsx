@@ -49,7 +49,7 @@ const NavBar = ({ onProtocolChangeSubmit }) => {
 
 
                         <li className="nav-item">
-                            <Link className="nav-link" to="/nft-collections">NFT & Collections</Link>
+                            <Link className="nav-link" to="/nft-collections/default">NFT & Collections</Link>
                         </li>
                     </ul>
 

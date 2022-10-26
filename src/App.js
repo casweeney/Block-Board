@@ -9,6 +9,7 @@ import StakingReports from './components/StakingReports';
 import NftCollection from './components/NftCollection';
 import TxDetails from './components/TxDetails';
 import BlockTransactions from './components/BlockTransactions';
+import NftDetails from './components/NftDetails';
 
 function App() {
     const [currentBlock, setCurrentBlock] = useState(null);
@@ -126,8 +127,12 @@ function App() {
           <StakingReports />
         </Route>
 
-        <Route path="/nft-collections" exact>
+        <Route path="/nft-collections/:address" exact>
           <NftCollection />
+        </Route>
+
+        <Route path="/nft-details/:nftId" exact>
+          <NftDetails />
         </Route>
 
         <Route path="/details/tx/:protocol/:transactionId" exact>
