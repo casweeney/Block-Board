@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useHistory, useParams } from "react-router-dom";
 import LoadingSpinner from "./UI/LoadingSpinner";
+import OwlCarousel from "react-owl-carousel";
+import "owl.carousel/dist/assets/owl.carousel.css";
+import "owl.carousel/dist/assets/owl.theme.default.css";
 
 const NftCollection = () => {
     const params = useParams();
@@ -10,6 +13,7 @@ const NftCollection = () => {
     const [account, setAccount] = useState(address);
     const [protocol, setProtocol] = useState("ethereum");
     const [nfts, setNfts] = useState(null);
+    const [collections, setCollections] = useState(null);
 
     const accountChangeHandler = (e) => {
         setAccount(e.target.value);
@@ -43,16 +47,40 @@ const NftCollection = () => {
             setNfts(data);
 
         } else {
-            const response = await fetch(`https://ubiquity.api.blockdaemon.com/nft/v1/${protocol}/mainnet/assets?wallet_address=${account}`, {
+            if(account.length === 42) {
+                const response = await fetch(`https://ubiquity.api.blockdaemon.com/nft/v1/${protocol}/mainnet/assets?wallet_address=${account}`, {
+                headers: {
+                    Authorization: `Bearer ${process.env.REACT_APP_UBIQUITY_KEY}`
+                }
+                });
+        
+                const data = await response.json();
+
+                setNfts(data);
+            } else {
+                const response = await fetch(`https://ubiquity.api.blockdaemon.com/nft/v1/ethereum/mainnet/assets?collection_id=${account}`, {
+                    headers: {
+                        Authorization: `Bearer ${process.env.REACT_APP_UBIQUITY_KEY}`
+                    }
+                });
+
+                const data = await response.json();
+
+                setNfts(data);
+            }
+        }
+    }
+
+    const getCollections = async () => {
+        const response = await fetch(`https://ubiquity.api.blockdaemon.com/nft/v1/ethereum/mainnet/collections`, {
             headers: {
                 Authorization: `Bearer ${process.env.REACT_APP_UBIQUITY_KEY}`
             }
-            });
-    
-            const data = await response.json();
+        });
 
-            setNfts(data);
-        }
+        const data = await response.json();
+
+        setCollections(data);
     }
 
     function isImage(url) {
@@ -61,11 +89,12 @@ const NftCollection = () => {
 
     useEffect(() => {
         getNfts();
+        getCollections();
     }, [address]);
 
     console.log(nfts);
 
-    if(nfts === null) {
+    if(nfts === null && collections === null) {
         return (
             <div className="text-center mt-5">
                 <LoadingSpinner />
@@ -104,6 +133,22 @@ const NftCollection = () => {
             </div>
 
             <div className="container-fluid mt-5">
+                <h5 className="text-white">Explore Popular Collections</h5>
+                <OwlCarousel items={10} margin={8} autoplay={true} loop={true}>
+                    {collections.data.length > 0 && collections.data.map((collection, index) => {
+                        return (
+                            <div key={index}>
+                                <a href={`/nft-collections/4203aedd-7964-5fe1-b932-eb8c4fda7822`} className="btn btn-dark btn-block" style={{ fontSize: "10px" }}>
+                                    <img src={`/nft/${index + 1}.png`} className="img-fluid rounded" alt="" />
+                                    {collection.name === "" ? "No Name" : collection.name}
+                                </a>
+                            </div>
+                        );
+                    })}
+                </OwlCarousel>
+
+                <hr className="border-white" />
+
                 <div className="row">
                     { nfts !== null && nfts.data.length > 0 && nfts.data.map((nft) => {
                         let imgUrl;
