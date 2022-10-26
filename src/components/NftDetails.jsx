@@ -123,7 +123,7 @@ const NftDetails = () => {
                                 <div className="row">
                                     {nftDetails.asset.attributes.length > 0 && 
                                         nftDetails.asset.attributes.map((attribute, index) => (
-                                            <div className="col-md-4 mb-2" key={index}>
+                                            <div className="col-md-4 col-6 mb-2" key={index}>
                                                 <div className="card text-center bg-dark-gray text-white">
                                                     <div className="card-body">
                                                         <h6>{attribute.trait_type}</h6>

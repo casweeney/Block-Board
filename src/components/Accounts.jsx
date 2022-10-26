@@ -155,7 +155,8 @@ const Accounts = () => {
                                                 
                                                 <td>{innerTxn.destination ? `${innerTxn.destination.slice(0,6)}...${innerTxn.destination.slice(-6)}` : protocol}</td>
                                                 <td>
-                                                    <span className="badge badge-pill badge-success px-2 py-1">{innerTxn.amount / (1 * 10 ** innerTxn.decimal)}</span>
+                                                    {/* <span className="badge badge-pill badge-success px-2 py-1">{innerTxn.amount / (1 * 10 ** innerTxn.decimal)}</span> */}
+                                                    <span className="badge badge-pill badge-success px-2 py-1">{innerTxn.amount}</span>
                                                 </td>
                                                 <td>
                                                     <button className="btn btn-outline-primary btn-sm explore-btn"><Link className="text-white" to={`/details/tx/${protocol}/${innerTxn.transaction_id}`}>Explore Block</Link></button>
