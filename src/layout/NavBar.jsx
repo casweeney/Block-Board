@@ -43,9 +43,9 @@ const NavBar = ({ onProtocolChangeSubmit }) => {
                         </li> */}
                         
 
-                        {/* <li className="nav-item">
+                        <li className="nav-item">
                             <Link className="nav-link" to="/gas-fee">Gas Fee Estimate</Link>
-                        </li> */}
+                        </li>
 
 
                         <li className="nav-item">
@@ -53,7 +53,7 @@ const NavBar = ({ onProtocolChangeSubmit }) => {
                         </li>
                     </ul>
 
-                    {/* <form onSubmit={chainSubmitHandler} className="form-inline">
+                    <form onSubmit={chainSubmitHandler} className="form-inline">
                         <div className="input-group">
                         <select onChange={chainChangeHandler} className="form-control text-white search-gray search-bar-border" aria-label="protocol-name" aria-describedby="basic-addon1">
                             <option value="bitcoin">Bitcoin</option>
@@ -68,7 +68,7 @@ const NavBar = ({ onProtocolChangeSubmit }) => {
                             <button className="input-group-text btn btn-secondary" id="basic-addon1">Change Protocol</button>
                         </div>
                         </div>
-                    </form> */}
+                    </form>
                 </div>
             </div>
         </nav>
