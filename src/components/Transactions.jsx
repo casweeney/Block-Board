@@ -57,7 +57,7 @@ const Transactions = ({defaultProtocol, blockIdentifiers, blockTransactions}) =>
                 </div>
 
                 <div className="row mt-5">
-                    <div className="col-md-6">
+                    <div className="col-md-6 mb-3">
                         <div className="card table-card pb-3">
                             <div className="card-body">
                                 <div style={{ display: "flex", justifyContent: "space-between"}}>
