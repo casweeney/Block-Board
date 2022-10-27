@@ -105,7 +105,7 @@ const NftDetails = () => {
                     </div>
                 </div>
                 <div className="row">
-                    <div className="col-md-5">
+                    <div className="col-md-5 mb-3">
                         <div className="module-border-wrap">  
                             <div className="card extra-dark nft-card">
                             {nftDetails.asset.media.image_url === "" ? <img src="/nft/noimage2.webp" alt="" /> : <img className="card-img-top" src={`https://ubiquity.api.blockdaemon.com/nft/v1/ethereum/mainnet/media/${imgUrl}?apiKey=${process.env.REACT_APP_UBIQUITY_KEY}`} alt="Card image" />}
