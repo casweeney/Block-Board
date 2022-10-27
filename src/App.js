@@ -104,7 +104,7 @@ function App() {
 
   return (
     <div>
-      {/* <iframe src="https://coinhippo.io?widget=price-marquee&theme=dark" title="Price Update" frameBorder="0" width="100%" height="60"></iframe> */}
+      <iframe src="https://coinhippo.io?widget=price-marquee&theme=dark" title="Price Update" frameBorder="0" width="100%" height="60"></iframe>
       <NavBar onProtocolChangeSubmit={changeDefaultProtocol} />
       <Switch>
         <Route path="/" exact>

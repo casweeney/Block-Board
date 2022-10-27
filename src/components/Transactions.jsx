@@ -37,26 +37,22 @@ const Transactions = ({defaultProtocol, blockIdentifiers, blockTransactions}) =>
                         </div>
                     </div>
                     
-                    <div className="col-md-3">
-                        <div className="col-md-12 mb-4" style={{ overflowX: "scroll" }}>
-                            <iframe src={`https://coinhippo.io/token/${defaultProtocol === "bitcoincash" ? "bitcoin-cash" : defaultProtocol}?view=widget&theme=dark`} title={dataProtocol} frameBorder="0" width="320" height="240"></iframe>
-                        </div>
+                    <div className="col-md-3 text-center mb-4" style={{ overflowX: "scroll" }}>
+                        <iframe src={`https://coinhippo.io/token/${defaultProtocol === "bitcoincash" ? "bitcoin-cash" : defaultProtocol}?view=widget&theme=dark`} title={dataProtocol} frameBorder="0" width="320" height="240"></iframe>
                     </div>
 
 
-                    {/* <div className="col-md-3">
-                        <div className="col-md-12">
-                            <iframe src="https://coinhippo.io?widget=top-movers&theme=dark" title="Top Gainers/Losers" frameBorder="0" width="320" height="320"></iframe>
-                        </div>
-                    </div> */}
+                    <div className="col-md-3 text-center" style={{ overflowX: "scroll" }}>
+                        <iframe src="https://coinhippo.io?widget=top-movers&theme=dark" title="Top Gainers/Losers" frameBorder="0" width="320" height="320"></iframe>
+                    </div>
 
-                    {/* <div className="col-md-3">
+                    <div className="col-md-3 text-center" style={{ overflowX: "scroll" }}>
                         <iframe src="https://coinhippo.io?widget=dominance&theme=dark" title="Dominance" frameBorder="0" width="320" height="320"></iframe>
-                    </div> */}
+                    </div>
 
-                    {/* <div className="col-md-3">
+                    <div className="col-md-3 text-center"  style={{ overflowX: "scroll" }}>
                         <iframe src="https://coinhippo.io?widget=trending&theme=dark" title="Trending Search" frameBorder="0" width="320" height="320"></iframe>
-                    </div> */}
+                    </div>
 
                 </div>
 
