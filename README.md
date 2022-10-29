@@ -1,70 +1,32 @@
-# Getting Started with Create React App
+# Blockboard
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Blockboard is a multichain block explorer and analytics tool that helps users analyze block transactions, transaction hashes, address balance and transactions, NFTs of an address all in one platform across different blockchain protocols.
 
-## Available Scripts
+## Benefits of using Blockboard
 
-In the project directory, you can run:
+1. View, analyze assets, address balances and transactions on different blockchains using one tool/dashbaord.
+2. Analyze NFTs of an address and check the properties of each NFT.
+3. Get comprehensive metadata (detailed information) of an NFT
+4. Blockboard is a simple and user friendly application which is very easy to navigate and use.
+5. Get recent gas price for different blockchain protocols.
+6. View price ticker of major cryptocurrencies on the crypto ecosystem.
 
-### `npm start`
+### Built with
+1. React.js - JavaScript library for building single page applications.
+2. Bootstrap - Bootstrap is a powerful, feature-packed frontend UI toolkit for building user interfaces.
+3. Ethers.js - Allows users to interact with a local or remote ethereum node using HTTP, IPC or WebSocket.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+### API Endpoints
+Blockboard is fully powered by the Blockdaemon Ubiquity API Suite.
 
-### `npm test`
+Ubiquity is a blockchain-as-a-service solution that connects you to multiple protocols without needing your own infrastructure.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+Blockboard utilizes a greater amount of the Ubiquity API to achieve it solutions, these APIs are in the following sections:
+1. Universal API (Protocols, Accounts, Blocks, Transactions)
+2. NFT API ()
+3. Specialized API (Gas Fee Estimation API)
 
 ### Deployment
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+This project is deployed on Vercel
