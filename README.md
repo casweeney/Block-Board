@@ -29,4 +29,4 @@ Blockboard utilizes a greater amount of the Ubiquity API to achieve it solutions
 
 ### Deployment
 
-This project is deployed on Vercel
+This project is deployed on Vercel(A free hosting platform)
