@@ -30,7 +30,7 @@ const Transactions = ({defaultProtocol, blockIdentifiers, blockTransactions}) =>
                             <div className="col-md-12">
                                 <div className="card text-white" style={{ backgroundColor: "#0F172A" }}>
                                     <div className="card-body text-center">
-                                        <h4 style={{ lineHeight: "1.5" }}>Track your transactions in one place across multiple blockchains, not all over the place.</h4>
+                                        <h4 style={{ lineHeight: "1.5" }}>Track your transactions and assets in one place across multiple blockchains, not all over the place.</h4>
                                     </div>
                                 </div>
                             </div>
