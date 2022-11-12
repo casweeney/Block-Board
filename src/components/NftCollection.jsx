@@ -90,6 +90,7 @@ const NftCollection = () => {
     useEffect(() => {
         getNfts();
         getCollections();
+        // eslint-disable-next-line
     }, [address]);
 
     console.log(nfts);
@@ -163,7 +164,7 @@ const NftCollection = () => {
                                 <div className="module-border-wrap">  
                                     <div className="card extra-dark nft-card">
                                         <Link to={`/nft-details/${nft.id}`}>
-                                            {nft.image_url === "" ? <img src="/nft/noimage2.webp" className="card-img-top" alt="" /> : <img className="card-img-top" src={`https://ubiquity.api.blockdaemon.com/nft/v1/ethereum/mainnet/media/${imgUrl}?apiKey=${process.env.REACT_APP_UBIQUITY_KEY}`} alt="Card image" />}
+                                            {nft.image_url === "" ? <img src="/nft/noimage2.webp" className="card-img-top" alt="Not Found" /> : <img className="card-img-top" src={`https://ubiquity.api.blockdaemon.com/nft/v1/ethereum/mainnet/media/${imgUrl}?apiKey=${process.env.REACT_APP_UBIQUITY_KEY}`} alt="NFT Item" />}
                                         </Link>
                                         
                                         <div className="card-body text-white">

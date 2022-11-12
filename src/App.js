@@ -34,47 +34,63 @@ function App() {
     }
 
     const getLatestTransactions = async () => {
-      const response = await fetch(`https://ubiquity.api.blockdaemon.com/v1/${defaultProtocol}/mainnet/txs`, {
-        headers: {
-          Authorization: `Bearer ${process.env.REACT_APP_UBIQUITY_KEY}`
-        }
-      });
+      try {
+        const response = await fetch(`https://ubiquity.api.blockdaemon.com/v1/${defaultProtocol}/mainnet/txs`, {
+          headers: {
+            Authorization: `Bearer ${process.env.REACT_APP_UBIQUITY_KEY}`
+          }
+        });
 
-      const data = await response.json();
-      setLatestTransactions(data);
+        const data = await response.json();
+        setLatestTransactions(data);
+      } catch (error) {
+        console.log(error);
+      }
     }
 
     const getBlockIdentifiers = async () => {
-      const response = await fetch(`https://ubiquity.api.blockdaemon.com/v1/${defaultProtocol}/mainnet/block_identifiers`, {
-        headers: {
-          Authorization: `Bearer ${process.env.REACT_APP_UBIQUITY_KEY}`
-        }
-      });
+      try {
+        const response = await fetch(`https://ubiquity.api.blockdaemon.com/v1/${defaultProtocol}/mainnet/block_identifiers`, {
+          headers: {
+            Authorization: `Bearer ${process.env.REACT_APP_UBIQUITY_KEY}`
+          }
+        });
 
-      const data = await response.json();
-      setBlockIdentifiers(data);
+        const data = await response.json();
+        setBlockIdentifiers(data);
+      } catch (error) {
+        console.log(error);
+      }
     }
 
     const getCurrentBlock = async () => {
-      const response = await fetch(`https://ubiquity.api.blockdaemon.com/v1/${defaultProtocol}/mainnet/sync/block_number`, {
-        headers: {
-          Authorization: `Bearer ${process.env.REACT_APP_UBIQUITY_KEY}`
-        }
-      });
+      try {
+        const response = await fetch(`https://ubiquity.api.blockdaemon.com/v1/${defaultProtocol}/mainnet/sync/block_number`, {
+          headers: {
+            Authorization: `Bearer ${process.env.REACT_APP_UBIQUITY_KEY}`
+          }
+        });
 
-      const data = await response.json();
-      setCurrentBlock(data);
+        const data = await response.json();
+        setCurrentBlock(data);
+      } catch (error) {
+        console.log(error);
+      }
     }
 
     const getBlockTransactions = async () => {
-      const response = await fetch(`https://ubiquity.api.blockdaemon.com/v1/${defaultProtocol}/mainnet/block/${currentBlock}`, {
-        headers: {
-          Authorization: `Bearer ${process.env.REACT_APP_UBIQUITY_KEY}`
-        }
-      });
+      try {
+        const response = await fetch(`https://ubiquity.api.blockdaemon.com/v1/${defaultProtocol}/mainnet/block/${currentBlock}`, {
+          headers: {
+            Authorization: `Bearer ${process.env.REACT_APP_UBIQUITY_KEY}`
+          }
+        });
 
-      const data = await response.json();
-      setBlockTransactions(data);
+        const data = await response.json();
+        setBlockTransactions(data);
+      } catch (error) {
+        console.log(error);
+      }
     }
 
     useEffect(() => {
@@ -104,7 +120,19 @@ function App() {
 
   return (
     <div>
-      <iframe src="https://coinhippo.io?widget=price-marquee&theme=dark" title="Price Update" frameBorder="0" width="100%" height="60"></iframe>
+      <coingecko-coin-price-marquee-widget  coin-ids="bitcoin,eos,ethereum,litecoin,ripple,solana,dogecoin" currency="usd" background-color="#000000" locale="en" font-color="#ffffff"></coingecko-coin-price-marquee-widget>
+      <div id="cr-widget-marquee"
+        data-coins="bitcoin,ethereum,tether,ripple,cardano,litecoin,tezos,dogecoin,polkadot"
+        data-theme="dark"
+        data-show-symbol="true"
+        data-show-icon="true"
+        data-show-period-change="true"
+        data-period-change="24H"
+        data-api-url="https://api.cryptorank.io/v0"
+        className="text-center"
+      >
+        <a href="https://cryptorank.io">Loading... Coins by BlockBoard</a>
+      </div>
       <NavBar onProtocolChangeSubmit={changeDefaultProtocol} />
       <Switch>
         <Route path="/" exact>

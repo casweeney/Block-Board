@@ -15,15 +15,19 @@ const TxDetails = () => {
     console.log(transactionDetails);
 
     const getTransctionById = async () => {
-        const response = await fetch(`https://ubiquity.api.blockdaemon.com/v1/${protocol}/mainnet/tx/${transactionId}`, {
-          headers: {
-            Authorization: `Bearer ${process.env.REACT_APP_UBIQUITY_KEY}`
-          }
-        });
-  
-        const data = await response.json();
-        setTransactionDetails(data);
-        // console.log(data);
+        try {
+            const response = await fetch(`https://ubiquity.api.blockdaemon.com/v1/${protocol}/mainnet/tx/${transactionId}`, {
+            headers: {
+                Authorization: `Bearer ${process.env.REACT_APP_UBIQUITY_KEY}`
+            }
+            });
+    
+            const data = await response.json();
+            setTransactionDetails(data);
+            // console.log(data);
+        } catch (error) {
+            console.log(error);
+        }
     }
 
     useEffect(() => {
