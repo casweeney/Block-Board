@@ -32,15 +32,19 @@ const NftDetails = () => {
     }
 
     const getNftDetails = async () => {
-        const response = await fetch(`https://ubiquity.api.blockdaemon.com/nft/v1/ethereum/mainnet/asset/${nftId}?show_wallets=true`, {
-            headers: {
-                Authorization: `Bearer ${process.env.REACT_APP_UBIQUITY_KEY}`
-            }
-        });
+        try {
+            const response = await fetch(`https://ubiquity.api.blockdaemon.com/nft/v1/ethereum/mainnet/asset/${nftId}?show_wallets=true`, {
+                headers: {
+                    Authorization: `Bearer ${process.env.REACT_APP_UBIQUITY_KEY}`
+                }
+            });
 
-        const data = await response.json();
+            const data = await response.json();
 
-        setNftDetails(data);
+            setNftDetails(data);
+        } catch (error) {
+            console.log(error);
+        }
     }
 
     function isImage(url) {
@@ -49,6 +53,7 @@ const NftDetails = () => {
 
     useEffect(() => {
         getNftDetails();
+        // eslint-disable-next-line
     },[]);
 
     if(nftDetails === null) {
@@ -108,7 +113,7 @@ const NftDetails = () => {
                     <div className="col-md-5 mb-3">
                         <div className="module-border-wrap">  
                             <div className="card extra-dark nft-card">
-                            {nftDetails.asset.media.image_url === "" ? <img src="/nft/noimage2.webp" alt="" /> : <img className="card-img-top" src={`https://ubiquity.api.blockdaemon.com/nft/v1/ethereum/mainnet/media/${imgUrl}?apiKey=${process.env.REACT_APP_UBIQUITY_KEY}`} alt="Card image" />}
+                            {nftDetails.asset.media.image_url === "" ? <img src="/nft/noimage2.webp" alt="Not Found" /> : <img className="card-img-top" src={`https://ubiquity.api.blockdaemon.com/nft/v1/ethereum/mainnet/media/${imgUrl}?apiKey=${process.env.REACT_APP_UBIQUITY_KEY}`} alt="NFT Item" />}
                             </div>
                         </div>
                     </div>

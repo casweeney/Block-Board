@@ -14,27 +14,36 @@ const Accounts = () => {
     const [accountTransactions, setAccountTransactions] = useState(null);
 
     const getAccountData = async () => {
-        const response = await fetch(`https://ubiquity.api.blockdaemon.com/v1/${protocol}/${network}/account/${address}`, {
+        try {
+            const response = await fetch(`https://ubiquity.api.blockdaemon.com/v1/${protocol}/${network}/account/${address}`, {
+            headers: {Authorization: `Bearer ${process.env.REACT_APP_UBIQUITY_KEY}`}
+            });
+
+            const data = await response.json();
+            setAccountData(data);
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+    const getAccountTransactions = async () => {
+      try {
+        const response = await fetch(`https://ubiquity.api.blockdaemon.com/v1/${protocol}/${network}/account/${address}/txs`, {
             headers: {Authorization: `Bearer ${process.env.REACT_APP_UBIQUITY_KEY}`}
         });
 
         const data = await response.json();
-        setAccountData(data);
-    }
 
-    const getAccountTransactions = async () => {
-      const response = await fetch(`https://ubiquity.api.blockdaemon.com/v1/${protocol}/${network}/account/${address}/txs`, {
-        headers: {Authorization: `Bearer ${process.env.REACT_APP_UBIQUITY_KEY}`}
-      });
-
-      const data = await response.json();
-
-      setAccountTransactions(data);
+        setAccountTransactions(data);
+      } catch (error) {
+        console.log(error);
+      }
     }
 
     useEffect(() => {
         getAccountData();
         getAccountTransactions();
+        // eslint-disable-next-line
     }, [address, protocol]);
 
     const loggedAccount = address;
@@ -59,7 +68,7 @@ const Accounts = () => {
     const fetchFiltered = () => {
         if(accountTransactions !== null) {
             const filtered = accountTransactions.data.map((txn) => {
-                return txn.events.filter((innerTxn) => innerTxn.source == loggedAccount || innerTxn.destination == loggedAccount)
+                return txn.events.filter((innerTxn) => innerTxn.source === loggedAccount || innerTxn.destination === loggedAccount)
             });
     
             setFiltered(filtered);
@@ -68,6 +77,7 @@ const Accounts = () => {
 
     useEffect(() => {
         fetchFiltered();
+        // eslint-disable-next-line
     }, [accountTransactions]);
 
 

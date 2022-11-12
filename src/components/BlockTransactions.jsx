@@ -11,17 +11,22 @@ const BlockTransactions = () => {
     const [blockTransactions, setBlockTransactions] = useState(null);
 
     const getBlockTransactions = async () => {
-        const response = await fetch(`https://ubiquity.api.blockdaemon.com/v1/${protocol}/mainnet/block/${blockNumber}`, {
-          headers: {Authorization: `Bearer ${process.env.REACT_APP_UBIQUITY_KEY}`}
-        });
-  
-        const data = await response.json();
-  
-        setBlockTransactions(data);
+        try {
+            const response = await fetch(`https://ubiquity.api.blockdaemon.com/v1/${protocol}/mainnet/block/${blockNumber}`, {
+            headers: {Authorization: `Bearer ${process.env.REACT_APP_UBIQUITY_KEY}`}
+            });
+    
+            const data = await response.json();
+    
+            setBlockTransactions(data);
+        } catch (error) {
+            console.log(error);
+        }
     }
 
     useEffect(() => {
         getBlockTransactions();
+        // eslint-disable-next-line
     }, [blockNumber]);
 
 
