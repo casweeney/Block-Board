@@ -122,7 +122,7 @@ const Accounts = () => {
 
                                     <div className="col-md-6 col-6">
                                         <h5 className="text-white">{accountDetails.name}: {accountDetails.balance !== "N/A" && parseFloat(ethers.utils.formatUnits(accountDetails.balance, accountDetails.decimal)).toFixed(6)} ({accountDetails.symbol})</h5>
-                                        <h2 className="text-info">$7.22</h2>
+                                        {/* <h2 className="text-info">$7.22</h2> */}
                                     </div>
                                 </div>
                             </div>
