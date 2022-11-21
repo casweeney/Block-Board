@@ -122,7 +122,7 @@ function App() {
     <div>
       <coingecko-coin-price-marquee-widget  coin-ids="bitcoin,eos,ethereum,litecoin,ripple,solana,dogecoin" currency="usd" background-color="#000000" locale="en" font-color="#ffffff"></coingecko-coin-price-marquee-widget>
       <div style={{ backgroundColor: "#000000", overflow: "hidden", height: "62px", padding: "0px", margin: "0px", width: "100%" }}>
-        <iframe src="https://widget.coinlib.io/widget?type=horizontal_v2&theme=dark&pref_coin_id=1505&invert_hover=" width="100%" height="36px" scrolling="auto" marginwidth="0" marginheight="0" frameborder="0" border="0" style={{ border: "0", margin: "0", padding: "0" }}></iframe>
+        <iframe title="coinmarquee" src="https://widget.coinlib.io/widget?type=horizontal_v2&theme=dark&pref_coin_id=1505&invert_hover=" width="100%" height="36px" scrolling="auto" marginWidth="0" marginHeight="0" frameBorder="0" border="0" style={{ border: "0", margin: "0", padding: "0" }}></iframe>
       </div>
 
       {/* <div id="cr-widget-marquee"
