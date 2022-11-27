@@ -167,9 +167,9 @@ const GasFee = () => {
                                     <img className="pr-1" src="https://s2.coinmarketcap.com/static/img/coins/64x64/1027.png" alt="" />
                                     <div className="mr-5">
                                         <p className="text-white mini-text">Ethereum</p>
-                                        <p className="text-white mini-text">Fast: {ethFeeHolder.fast}</p>
-                                        <p className="text-white mini-text">Medium: {ethFeeHolder.medium}</p>
-                                        <p className="text-white mini-text">Slow: {ethFeeHolder.slow}</p>
+                                        <p className="text-white mini-text">Fast: {ethFeeHolder.fast} Gwei</p>
+                                        <p className="text-white mini-text">Medium: {ethFeeHolder.medium} Gwei</p>
+                                        <p className="text-white mini-text">Slow: {ethFeeHolder.slow} Gwei</p>
                                         <p className="text-white mini-text">Most Recent Block: {ethFeeHolder.recentBlock}</p>
                                     </div>
                                 </div>
