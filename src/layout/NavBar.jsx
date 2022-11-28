@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from "react-router-dom";
 
-const NavBar = ({ onProtocolChangeSubmit }) => {
+const NavBar = ({ currentProtocol, onProtocolChangeSubmit }) => {
     const [defaultProtocol, setDefaultProtocol] = useState("");
 
     const chainChangeHandler = (e) => {
@@ -56,13 +56,13 @@ const NavBar = ({ onProtocolChangeSubmit }) => {
                     <form onSubmit={chainSubmitHandler} className="form-inline">
                         <div className="input-group">
                         <select onChange={chainChangeHandler} className="form-control text-white search-gray search-bar-border" aria-label="protocol-name" aria-describedby="basic-addon1">
-                            <option value="bitcoin">Bitcoin</option>
-                            <option value="bitcoincash">Bitcoin Cash</option>
-                            <option value="dogecoin">Dogecoin</option>
-                            <option value="ethereum">Ethereum</option>
-                            <option value="litecoin">Litecoin</option>
-                            <option value="polkadot">Polkadot</option>
-                            <option value="tezos">Tezos</option>
+                            <option value="bitcoin" selected={currentProtocol === "bitcoin" ? "selected" : ""}>Bitcoin</option>
+                            <option value="bitcoincash" selected={currentProtocol === "bitcoincash" ? "selected" : ""}>Bitcoin Cash</option>
+                            <option value="dogecoin" selected={currentProtocol === "dogecoin" ? "selected" : ""}>Dogecoin</option>
+                            <option value="ethereum" selected={currentProtocol === "ethereum" ? "selected" : ""}>Ethereum</option>
+                            <option value="litecoin" selected={currentProtocol === "litecoin" ? "selected" : ""}>Litecoin</option>
+                            <option value="polkadot" selected={currentProtocol === "polkadot" ? "selected" : ""}>Polkadot</option>
+                            <option value="tezos" selected={currentProtocol === "tezos" ? "selected" : ""}>Tezos</option>
                         </select>
                         <div className="input-group-append">
                             <button className="input-group-text btn btn-secondary" id="basic-addon1">Change Protocol</button>

@@ -137,7 +137,7 @@ function App() {
       >
         <a href="https://cryptorank.io">Loading... Coins by BlockBoard</a>
       </div> */}
-      <NavBar onProtocolChangeSubmit={changeDefaultProtocol} />
+      <NavBar currentProtocol={defaultProtocol} onProtocolChangeSubmit={changeDefaultProtocol} />
       <Switch>
         <Route path="/" exact>
           <Transactions defaultProtocol={defaultProtocol} blockIdentifiers={blockIdentifiers} blockTransactions={blockTransactions} />
