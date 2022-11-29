@@ -81,7 +81,7 @@ const Accounts = () => {
     }, [accountTransactions]);
 
 
-    if(accountData === null) {
+    if(accountData === null && accountTransactions === null) {
         return (
             <div className="text-center mt-5">
                 <LoadingSpinner />
@@ -89,6 +89,8 @@ const Accounts = () => {
             </div>
         )
     }
+
+    console.log("Filtered Items ", filtered);
 
     return (
         <main>
@@ -150,7 +152,7 @@ const Accounts = () => {
                                 </thead>
 
                                 <tbody className="micro-text">
-                                    {filtered !== null && filtered.map((txn, index) => (
+                                    {filtered !== null ? filtered.map((txn, index) => (
                                         txn.map((innerTxn, innerIndex) => (
                                             <tr className="custom-tr" key={innerTxn.id}>
                                                 <td><span><i className="fa fa-cube"></i></span></td>
@@ -173,7 +175,10 @@ const Accounts = () => {
                                                 </td>
                                             </tr>
                                         ))
-                                    ))}
+                                    ))
+                                    :
+                                    <h4 className="text-center">Loading transactions</h4>
+                                }
                                 </tbody>
                             </table>
                         </div>
