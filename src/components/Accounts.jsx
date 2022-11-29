@@ -90,8 +90,6 @@ const Accounts = () => {
         )
     }
 
-    console.log("Filtered Items ", filtered);
-
     return (
         <main>
             <div className="search-holder pt-4 pb-4">
@@ -177,7 +175,7 @@ const Accounts = () => {
                                         ))
                                     ))
                                     :
-                                    <h4 className="text-center">Loading transactions</h4>
+                                    <h4 className="mt-5">Please wait: Loading transactions...</h4>
                                 }
                                 </tbody>
                             </table>
