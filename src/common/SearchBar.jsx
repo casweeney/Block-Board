@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 
-const SearchBar = () => {
+const SearchBar = ({ currentProtocol }) => {
     const [account, setAccount] = useState("");
-    const [protocol, setProtocol] = useState("");
+    const [protocol, setProtocol] = useState(currentProtocol);
     const [currentBlock, setCurrentBlock] = useState(null);
     const history = useHistory();
 
@@ -32,7 +32,7 @@ const SearchBar = () => {
         const defaultChain = JSON.parse(localStorage.getItem('defaultProtocol'));
         setProtocol(defaultChain);
         getCurrentBlock();
-    }, []);
+    }, [currentProtocol]);
 
     const accountSubmitHandler = (e) => {
         e.preventDefault();

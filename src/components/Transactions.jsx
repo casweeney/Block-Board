@@ -16,7 +16,7 @@ const Transactions = ({defaultProtocol, blockIdentifiers, blockTransactions}) =>
                     <div className="row">
                         <div className="col-md-2"></div>
                         <div className="col-md-8">
-                            <SearchBar />
+                            <SearchBar currentProtocol={defaultProtocol} />
                         </div>
                         <div className="col-md-2"></div>
                     </div>

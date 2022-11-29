@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Route, Switch } from 'react-router-dom';
+import { useHistory, Route, Switch } from 'react-router-dom';
 import NavBar from "./layout/NavBar";
 import GasFee from "./components/GasFee";
 import Transactions from './components/Transactions';
@@ -17,6 +17,7 @@ function App() {
     const [blockIdentifiers, setBlockIdentifiers] = useState(null);
     const [latestTransactions, setLatestTransactions] = useState(null);
     const [defaultProtocol, setDefaultProtocol] = useState("");
+    const history = useHistory();
 
     console.log(defaultProtocol, " Current Block Number:", currentBlock)
 
@@ -31,6 +32,8 @@ function App() {
       defaultChain = JSON.parse(localStorage.getItem('defaultProtocol'));
       setDefaultProtocol(defaultChain);
       alert("Default protocol changed");
+
+      history.push("/");
     }
 
     const getLatestTransactions = async () => {

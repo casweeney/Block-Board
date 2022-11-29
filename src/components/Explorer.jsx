@@ -24,7 +24,7 @@ const Explorer = ({ latestTransactions, currentProtocol }) => {
                     <div className="row">
                         <div className="col-md-2"></div>
                         <div className="col-md-8">
-                            <SearchBar />
+                            <SearchBar currentProtocol={currentProtocol} />
                         </div>
                         <div className="col-md-2"></div>
                     </div>
