@@ -41,8 +41,8 @@ const Accounts = () => {
     }
 
     useEffect(() => {
-        getAccountData();
         getAccountTransactions();
+        getAccountData();
         // eslint-disable-next-line
     }, [address, protocol]);
 
@@ -97,7 +97,7 @@ const Accounts = () => {
                     <div className="row">
                         <div className="col-md-2"></div>
                         <div className="col-md-8">
-                            <SearchBar />
+                            <SearchBar currentProtocol={protocol} />
                         </div>
                         <div className="col-md-2"></div>
                     </div>
